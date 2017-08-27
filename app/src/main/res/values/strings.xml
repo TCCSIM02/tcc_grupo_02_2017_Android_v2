@@ -1,0 +1,106 @@
+<resources>
+    <string name="app_name">TCC</string>
+    <string name="process_with_Data">Processando dados..</string>
+    <string name="hint_search">Buscar</string>
+    <string name="title_activity_details">DetailsActivity</string>
+    <string name="thankyou">Obrigado pelo agendamento</string>
+    <string name="action_settings">Configurações</string>
+    <string name="error_can_not_connect_to_server">Impossível conectar ao servidor</string>
+    <string name="error_no_internet">Sem conexão com a internet</string>
+    <string name="already_booked">Horário já agendado</string>
+    <string name="tab_morning">Manhã</string>
+    <string name="tab_afternoon">Tarde</string>
+    <string name="tab_evening">Noite</string>
+    <string name="patient_contact">Contato do paciente</string>
+    <string name="appointment_time">Horário da consulta</string>
+    <string name="contact_info">Informação de consulta</string>
+    <string name="nav_update_profile">Atualizar perfil</string>
+    <string name="nav_change_password">Trocar senha</string>
+    <string name="nav_my_appointment">Minha consultas</string>
+    <string name="nav_logout">Logout</string>
+    <string name="nav_share">Compartilhar</string>
+    <string name="nav_rating">Avaliar-nos</string>
+    <string name="nav_login">Login</string>
+    <string name="item_title">Comunicar</string>
+    <string name="item_user">Gerenciamento do usuário</string>
+    <string name="tab_list">Lista</string>
+    <string name="tab_map">Mapa</string>
+    <string name="countinue_home">Continue Home</string>
+    <string name="track_my_order">Track my order</string>
+    <string name="date">Data</string>
+    <string name="time">hora</string>
+    <string name="tab_service">Serviços</string>
+    <string name="tab_details">Detalhes</string>
+    <string name="tab_reviews">Revisões</string>
+    <string name="tab_photo">Fotos</string>
+
+    <!-- LOGIN SCREEM -->
+    <string name="create_account">Criar uma conta</string>
+    <string name="createaccount_yourfirstname">Nome completo</string>
+    <string name="createaccount_yourphone">Celular:</string>
+    <string name="createaccount_emailaddress">Email address</string>
+    <string name="createaccount_createpassword">Criar uma senha</string>
+    <string name="createaccount_termsandprivacypolicy">Aceitar os termos</string>
+    <string name="createaccount_our">nossos</string>
+    <string name="createaccount_terms">Termos</string>
+    <string name="createaccount_and">e</string>
+    <string name="createaccount_privacypolicy">Politica de privacidade</string>
+    <string name="createaccount_next">Próximo</string>
+    <string name="login_now">Login</string>
+    <string name="sign_in">Sign In</string>
+    <string name="signin_emailaddress">Email</string>
+    <string name="signin_password">Senha</string>
+    <string name="signin_forgotmypassword">Esqueci minha senha</string>
+    <string name="register_new">Registrar novo usuário</string>
+    <string name="required">Requerido</string>
+    <string name="cancle">Cancelar</string>
+    <string name="your_ratings">Suas avaliações</string>
+    <string name="your_comment">Seus comentários</string>
+    <string name="your_comment_hint">Seu comentário aqui</string>
+    <!-- END LOGIN SCREEN -->
+    <string name="address">Endereço: </string>
+    <string name="phone">Telefone: </string>
+    <string name="contact_us">Contate-nos</string>
+    <string name="add_review">Adicionar avaliação</string>
+    <string name="send">Enviar</string>
+    <string name="valid_required_email">Email obrigatório</string>
+    <string name="valid_email">Insira um email valido</string>
+    <string name="valid_required_password">Senha obrigatório</string>
+    <string name="valid_required_fullname">Nome completo obrigatório</string>
+    <string name="valid_required_phone">Telefone obrigatório</string>
+    <string name="valid_required_current_password">As senhas precisam ser iguais</string>
+    <string name="valid_required_new_password">Obrigatório u</string>
+    <string name="valid_not_match">Insira a senha novamente</string>
+    <string name="update_profile">Atualizar perfil</string>
+    <string name="change_password">Trocar senha</string>
+    <string name="my_appointments">Meus agendamentos</string>
+    <string name="update">Atualizar</string>
+    <string name="profile_update_success">Perfil atualizado com sucesso</string>
+
+    <string name="new_password">Nova senha</string>
+    <string name="cur_password">Confirme a senha</string>
+    <string name="re_password">Insira a senha novamente</string>
+    <string name="cancel_confirmation">Tem certeza que deseja cancelar o agendamento?</string>
+    <string name="fire">Confirmar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="confirm_n_book">Confirmar e agendar consulta</string>
+    <string name="navigation_drawer_open">Abrir</string>
+    <string name="navigation_drawer_close">Fechar</string>
+    <string name="cover_area">Área de cobertura: </string>
+    <string name="search">Buscar</string>
+    <string name="allow_nearby">Próximo ao</string>
+
+    <string name="choose_country">Escolher estado</string>
+    <string name="choose_city">Escolher cidade</string>
+    <string name="choose_locality">Escolher unidade</string>
+    <string name="choose_doctor">Escolher doutor</string>
+    <string name="choose_date">Escolher data</string>
+
+    <string name="appoitnment_confirm_message_part1">Sua consulta foi agendada com sucusso, id: </string>
+    <string name="appointment_confirm_message_part2">visite, meus agendamentos para mais informações.</string>
+    <string name="email">Email :</string>
+
+    <string name="doacao_sangue">Minha Saúde</string>
+    <string name="vacinas">Carteira de Vacinas</string>
+    <string name="minha_saude">Doação de sangue</string>
+</resources>
