@@ -164,8 +164,6 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
                         progressBar1.setVisibility(View.GONE);
                     }
                 });
-
-
     }
 
     @Override
