@@ -143,7 +143,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         //}
         super.onResume();
     }
-
+    /* TESTE COMMIT*/
     public void loadData(){
         VJsonRequest vJsonRequest = new VJsonRequest(MainActivity.this, ApiParams.CATEGORY_LIST,
                 new VJsonRequest.VJsonResponce(){
