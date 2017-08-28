@@ -121,7 +121,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
         navigationView.setNavigationItemSelectedListener(this);
         Menu nav_Menu = navigationView.getMenu();
-        /*if (!common.is_user_login()){
+         /*if (!common.is_user_login()){
 
             nav_Menu.findItem(R.id.nav_appointment).setVisible(false);
             nav_Menu.findItem(R.id.nav_logout).setVisible(false);
@@ -210,6 +210,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
         }else if (id == R.id.nav_appointment) {
             Intent intent = new Intent(MainActivity.this,MyAppointmentsActivity.class);
+            //Intent intent = new Intent(MainActivity.this,TimeSlotActivity.class);
             startActivity(intent);
 
         }else if(id == R.id.nav_logout){

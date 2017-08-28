@@ -45,6 +45,15 @@ public class MyAppointmentsActivity extends CommonActivity {
 
         appointmentArray = new ArrayList<>();
 
+
+        /*Exemplo de agendamento para protótipo*/
+        AppointmentModel exCon = new AppointmentModel("0", "1995", "58", "2017-08-28", "2017-08-27", "2017-09-28", "Ativo"
+                , "TCC", "niltonfilho95@gmail.com", "(11) 97959 2632", "2017-08-28", "Itaquera", "Conjunto José Bonifácio"
+                , "niltonfilho95@gmail2.com", "-23.5456743", "-46.4371517", "(11) 2523 4014","", ""
+                , "", "Dr. Nilton", "");
+
+        appointmentArray.add(exCon);
+
         allowBack();
         setHeaderTitle(getString(R.string.my_appointments));
         swipeDetector = new SwipeDetector();

@@ -28,6 +28,31 @@ public class AppointmentModel {
     private String doct_name;
     private String doct_degree;
 
+    public AppointmentModel(String id, String user_id, String bus_id, String appointment_date, String start_time, String time_token, String status, String app_name, String app_email, String app_phone, String created_at, String bus_title, String bus_slug, String bus_email, String bus_latitude, String bus_longitude, String bus_contact, String bus_logo, String bus_fee, String currency, String doct_name, String doct_degree) {
+        this.id = id;
+        this.user_id = user_id;
+        this.bus_id = bus_id;
+        this.appointment_date = appointment_date;
+        this.start_time = start_time;
+        this.time_token = time_token;
+        this.status = status;
+        this.app_name = app_name;
+        this.app_email = app_email;
+        this.app_phone = app_phone;
+        this.created_at = created_at;
+        this.bus_title = bus_title;
+        this.bus_slug = bus_slug;
+        this.bus_email = bus_email;
+        this.bus_latitude = bus_latitude;
+        this.bus_longitude = bus_longitude;
+        this.bus_contact = bus_contact;
+        this.bus_logo = bus_logo;
+        this.bus_fee = bus_fee;
+        this.currency = currency;
+        this.doct_name = doct_name;
+        this.doct_degree = doct_degree;
+    }
+
     public String getId() {
         return id;
     }
