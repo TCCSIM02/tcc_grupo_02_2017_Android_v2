@@ -143,8 +143,6 @@ public class RegisterActivity extends CommonActivity {
                     common.setToastMessage(message.getData().getString(ApiParams.PARM_ERROR));
                 }
             }
-
-
         }
     };
 }
