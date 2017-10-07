@@ -4,21 +4,44 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.security.NoSuchAlgorithmException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 
 import Config.ApiParams;
-import util.BuscaCep;
+import models.ModelLogin;
+import models.ModelPaciente;
 import util.Mask;
 
 public class RegisterActivity extends CommonActivity {
-    EditText editEmail, editSenha, editConfirmaSenha, editCelular, editFullname, editCep, editEndereco, editCpf, editTelPrincipal, editTelOpcional, editDataNascimento;
+
+
+    EditText editNome;
+    EditText editDataNascimento;
+    EditText editNumeroConvenio;
+    EditText editCpf;
+    EditText editEstadoCivil;
+    EditText editCep;
+    EditText editEndereco;
+    EditText editCidade;
+    EditText editUf;
+    EditText editNumeroEndereco;
+    EditText editTelPrincipal;
+    EditText editTelOpcional;
+    EditText editCelular;
+    EditText editEmail;
+    EditText editNomeUsuario;
+    EditText editSenha;
+    EditText editConfirmaSenha;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,9 +49,16 @@ public class RegisterActivity extends CommonActivity {
         allowBack();
         setHeaderTitle(getString(R.string.register_new));
 
+        editNome = (EditText)findViewById(R.id.txtFirstname);
+        editNumeroConvenio = (EditText)findViewById(R.id.txtNumeroEndereco);
+        editEstadoCivil = (EditText)findViewById(R.id.txtEstadoCivil);
+        editCidade = (EditText)findViewById(R.id.txtCidade);
+        editUf = (EditText)findViewById(R.id.txtUF);
+        editNumeroEndereco = (EditText)findViewById(R.id.txtNumeroEndereco);
+
         editEmail = (EditText)findViewById(R.id.txtEmail);
+        editNomeUsuario = (EditText)findViewById(R.id.txtNomeUsuario);
         editSenha = (EditText)findViewById(R.id.txtSenha);
-        editFullname = (EditText)findViewById(R.id.txtFirstname);
         editConfirmaSenha = (EditText)findViewById(R.id.txtConfirmaSenha);
 
         editDataNascimento = (EditText) findViewById(R.id.txtDataNascimento);
@@ -47,7 +77,9 @@ public class RegisterActivity extends CommonActivity {
         editTelOpcional.addTextChangedListener(Mask.insert("(##)####-#####", editTelOpcional));
 
         editCep = (EditText)findViewById(R.id.txtCep);
-        editCep.addTextChangedListener(Mask.insert("#####-##", editCep));
+        editCep.addTextChangedListener(Mask.insert("#####-###", editCep));
+
+        editEndereco = (EditText)findViewById(R.id.txtEndereco);
 
         Button button = (Button)findViewById(R.id.btnCriarPaciente);
         button.setOnClickListener(new View.OnClickListener() {
@@ -59,43 +91,65 @@ public class RegisterActivity extends CommonActivity {
     }
     public void register(){
 
-        String email = editEmail.getText().toString();
-        String senha = editSenha.getText().toString();
-        String confirmaSenha = editConfirmaSenha.getText().toString();
-        //String fullname = editFullname.getText().toString();
-        //String phone = editCelular.getText().toString();
         boolean cancel = false;
         View focusView = null;
 
-        String cep = editCep.getText().toString();
+        String sNome = editNome.getText().toString();
+        String sDataNascimento = editDataNascimento.getText().toString();
+        String sNumeroConvenio = editNumeroConvenio.getText().toString();
+        String sCpf = editCpf.getText().toString();
+        String sEstadoCivil = editEstadoCivil.getText().toString();
+        String sCep = editCep.getText().toString();
+        String sEndereco = editEndereco.getText().toString();
+        String sCidade = editCidade.getText().toString();
+        String sUf = editUf.getText().toString();
+        String sNumeroEndereco = editNumeroEndereco.getText().toString();
+        String sTelPrincipal = editTelPrincipal.getText().toString();
+        String sTelOpcional = editTelOpcional.getText().toString();
+        String sCelular = editCelular.getText().toString();
+        String sEmail = editEmail.getText().toString();
+        String sNomeUsuario = editNomeUsuario.getText().toString();
+        String sSenha = editSenha.getText().toString();
+        String sConfirmaSenha = editConfirmaSenha.getText().toString();
 
-        BuscaCep bCep = new BuscaCep();
-
-
+        ModelLogin modelLogin = new ModelLogin(sNomeUsuario, sEmail, sSenha);
         try {
-            editEndereco.setText(bCep.getEndereco(cep));
-        } catch (IOException e) {
+            modelLogin.cadastrarLogin();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
             e.printStackTrace();
         }
 
-        // Check for a valid email address.
-        if (TextUtils.isEmpty(senha)) {
-            common.setToastMessage(getString(R.string.valid_required_password));
-            focusView = editSenha;
-            cancel = true;
-        }
-        else if (TextUtils.isEmpty(confirmaSenha)) {
-            common.setToastMessage(getString(R.string.valid_required_password));
-            focusView = editConfirmaSenha;
-            cancel = true;
+        int id = -1;
+        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+        java.sql.Date dataNasc = null;
+
+        try {
+            dataNasc = new java.sql.Date(format.parse(sDataNascimento).getTime());
+        } catch (ParseException e) {
+            e.printStackTrace();
         }
 
-        else if(senha != confirmaSenha ){
-            common.setToastMessage("A confirmação de senha precisa ser igual a senha");
-            focusView = editConfirmaSenha;
-            cancel = true;
+        ModelPaciente modelPaciente = new ModelPaciente(
+                sNumeroEndereco, null, sNome,
+                sCpf, dataNasc,  sEstadoCivil, sEmail,
+                "Brasileiro",  sEndereco, sCep,  sCidade,
+                sUf,  "Brasil",  sTelPrincipal,  sTelOpcional,  sCelular,
+                "1", id,  sNumeroConvenio);
+
+        int codLoginCadastrado = 0;
+        try {
+            codLoginCadastrado = modelLogin.getCodLoginCadastrado();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
         }
 
+        modelPaciente.codLoginCadastrado = codLoginCadastrado;
+
+        modelPaciente.cadastrarPaciente();
     }
     public final static boolean isValidEmail(CharSequence target) {
         if (target == null) {
