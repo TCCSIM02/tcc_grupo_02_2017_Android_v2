@@ -1,0 +1,2 @@
+configurations.maybeCreate("default")
+artifacts.add("default", file('mysql_connector_java_5_1_13_bin.jar'))

@@ -39,7 +39,7 @@
     <string name="createaccount_yourfirstname">Nome completo:</string>
     <string name="createaccount_yourphone">Celular:</string>
     <string name="createaccount_emailaddress">E-mail:</string>
-    <string name="createaccount_createpassword">Criar uma senha</string>
+    <string name="createaccount_createpassword">Criar uma senha:</string>
     <string name="createaccount_termsandprivacypolicy">Aceitar os termos</string>
     <string name="createaccount_our">nossos</string>
     <string name="createaccount_terms">Termos</string>

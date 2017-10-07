@@ -33,6 +33,18 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_2">
+            <EditText
+                android:id="@+id/txtDataNascimento"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:hint="Data de Nascimento:"
+                android:inputType="date" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_2">
                 <EditText
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -45,13 +57,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_2">
+
                 <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:inputType="text"
-                android:hint="CPF:"
-                android:id="@+id/txtCpf" />
+                    android:id="@+id/txtCpf"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="CPF:"
+                    android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -69,13 +82,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_2">
+
                 <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:inputType="text"
-                android:hint="CEP:"
-                android:id="@+id/txtCep" />]
+                    android:id="@+id/txtCep"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:hint="CEP:"
+                    android:inputType="number" />]
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -117,37 +131,40 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_2">
+
                 <EditText
+                    android:id="@+id/txtNumeroEndereco"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:inputType="text"
                     android:hint="Número:"
-                    android:id="@+id/txtNumeroEndereco" />
+                    android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_2">
+
                 <EditText
+                    android:id="@+id/txtTelPrincipal"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:inputType="text"
                     android:hint="Telefone Principal:"
-                    android:id="@+id/txtTelPrincipal" />
+                    android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/space_2">
+
                 <EditText
+                    android:id="@+id/txtTelOpcional"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="10dp"
-                    android:inputType="text"
                     android:hint="Telefone Opcional:"
-                    android:id="@+id/txtTelOpcional" />
+                    android:inputType="phone" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -159,7 +176,7 @@
                 android:layout_marginBottom="10dp"
                 android:inputType="phone"
                 android:hint="@string/createaccount_yourphone"
-                android:id="@+id/txtPhone" />
+                android:id="@+id/txtCelular" />
             </android.support.design.widget.TextInputLayout>
             <android.support.design.widget.TextInputLayout
                 android:layout_width="match_parent"
@@ -195,13 +212,25 @@
                 android:layout_marginBottom="10dp"
                 android:inputType="textPassword"
                 android:hint="@string/createaccount_createpassword"
-                android:id="@+id/txtPassword" />
+                android:id="@+id/txtSenha" />
+            </android.support.design.widget.TextInputLayout>
+            <android.support.design.widget.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/space_2">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="10dp"
+                    android:inputType="textPassword"
+                    android:hint="Confirme a senha:"
+                    android:id="@+id/txtConfirmaSenha" />
             </android.support.design.widget.TextInputLayout>
             <Button
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/register_new"
-                android:id="@+id/button"
+                android:id="@+id/btnCriarPaciente"
                 android:layout_marginTop="@dimen/activity_horizontal_margin"
                 android:textColor="@color/colorTextWhite"
                 android:background="@drawable/xml_button"/>

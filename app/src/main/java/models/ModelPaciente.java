@@ -4,10 +4,11 @@ package models;
  * Created by Nilton on 05/10/2017.
  */
 
-        import java.util.ArrayList;
-        import java.util.Date;
+import java.util.ArrayList;
+import java.util.Date;
 
-        import to.TOPaciente;
+import dao.DAOPaciente;
+import to.TOPaciente;
 
 public class ModelPaciente extends ModelUsuario {
 
@@ -94,7 +95,10 @@ public class ModelPaciente extends ModelUsuario {
     }
 
     public void cadastrarPaciente(){
-
+        DAOPaciente dao = new DAOPaciente();
+        TOPaciente toPaciente = getTO();
+        dao.cadastrarPaciente(toPaciente,codLoginCadastrado);
+        this.codPaciente = toPaciente.getCodPaciente();
     }
 
     public void alterarPaciente(){

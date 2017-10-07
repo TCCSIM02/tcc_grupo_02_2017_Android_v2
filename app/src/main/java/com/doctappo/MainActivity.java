@@ -1,14 +1,12 @@
 package com.doctappo;
 
 import android.content.Intent;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.GridLayoutManager;
-import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
@@ -19,7 +17,6 @@ import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -121,7 +118,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
         navigationView.setNavigationItemSelectedListener(this);
         Menu nav_Menu = navigationView.getMenu();
-         /*if (!common.is_user_login()){
+         if (!common.is_user_login()){
 
             nav_Menu.findItem(R.id.nav_appointment).setVisible(false);
             nav_Menu.findItem(R.id.nav_logout).setVisible(false);
@@ -130,7 +127,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             nav_Menu.findItem(R.id.nav_login).setVisible(true);
             navHeader.findViewById(R.id.txtFullName).setVisibility(View.GONE);
             navHeader.findViewById(R.id.textEmailId).setVisibility(View.GONE);
-        }else{*/
+        }else{
             nav_Menu.findItem(R.id.nav_appointment).setVisible(true);
             nav_Menu.findItem(R.id.nav_logout).setVisible(true);
             nav_Menu.findItem(R.id.nav_password).setVisible(true);
@@ -140,7 +137,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             navHeader.findViewById(R.id.textEmailId).setVisibility(View.VISIBLE);
             ((TextView)navHeader.findViewById(R.id.txtFullName)).setText(common.getSession(ApiParams.USER_FULLNAME));
             ((TextView)navHeader.findViewById(R.id.textEmailId)).setText(common.getSession(ApiParams.USER_EMAIL));
-        //}
+        }
         super.onResume();
     }
     /* TESTE COMMIT*/
