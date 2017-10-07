@@ -36,9 +36,9 @@
 
     <!-- LOGIN SCREEM -->
     <string name="create_account">Criar uma conta</string>
-    <string name="createaccount_yourfirstname">Nome completo</string>
+    <string name="createaccount_yourfirstname">Nome completo:</string>
     <string name="createaccount_yourphone">Celular:</string>
-    <string name="createaccount_emailaddress">Email address</string>
+    <string name="createaccount_emailaddress">E-mail:</string>
     <string name="createaccount_createpassword">Criar uma senha</string>
     <string name="createaccount_termsandprivacypolicy">Aceitar os termos</string>
     <string name="createaccount_our">nossos</string>
