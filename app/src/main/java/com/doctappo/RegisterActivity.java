@@ -7,8 +7,10 @@ import android.os.Message;
 import android.os.StrictMode;
 import android.text.TextUtils;
 import android.view.View;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -31,7 +33,7 @@ public class RegisterActivity extends CommonActivity {
     EditText editDataNascimento;
     EditText editNumeroConvenio;
     EditText editCpf;
-    EditText editEstadoCivil;
+    Spinner spinnerEstadoCivil;
     EditText editCep;
     EditText editEndereco;
     EditText editCidade;
@@ -53,13 +55,25 @@ public class RegisterActivity extends CommonActivity {
         allowBack();
         setHeaderTitle(getString(R.string.register_new));
 
+        spinnerEstadoCivil = (Spinner) findViewById(R.id.spnEstadoCivil);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.select_dialog_item, new String[]{
+                "Estado Civil:",
+                "Solteiro",
+                "Casado",
+                "Separado",
+                "Divorciado",
+                "Viúvo"
+        });
+        spinnerEstadoCivil.setAdapter(adapter);
+
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
 
         editNome = (EditText)findViewById(R.id.txtFirstname);
         editNumeroConvenio = (EditText)findViewById(R.id.txtNumeroEndereco);
-        editEstadoCivil = (EditText)findViewById(R.id.txtEstadoCivil);
+        //editEstadoCivil = (EditText)findViewById(R.id.txtEstadoCivil);
         editCidade = (EditText)findViewById(R.id.txtCidade);
         editUf = (EditText)findViewById(R.id.txtUF);
         editNumeroEndereco = (EditText)findViewById(R.id.txtNumeroEndereco);
@@ -87,7 +101,7 @@ public class RegisterActivity extends CommonActivity {
         editCep = (EditText)findViewById(R.id.txtCep);
         editCep.addTextChangedListener(Mask.insert("#####-###", editCep));
 
-        editEndereco = (EditText)findViewById(R.id.txtEndereco);
+        editEndereco  = (EditText)findViewById(R.id.txtEndereco);
 
         Button button = (Button)findViewById(R.id.btnCriarPaciente);
         button.setOnClickListener(new View.OnClickListener() {
@@ -106,7 +120,7 @@ public class RegisterActivity extends CommonActivity {
         String sDataNascimento = editDataNascimento.getText().toString();
         String sNumeroConvenio = editNumeroConvenio.getText().toString();
         String sCpf = editCpf.getText().toString();
-        String sEstadoCivil = editEstadoCivil.getText().toString();
+        String sEstadoCivil = spinnerEstadoCivil.getSelectedItem().toString();
         String sCep = editCep.getText().toString();
         String sEndereco = editEndereco.getText().toString();
         String sCidade = editCidade.getText().toString();
@@ -123,9 +137,14 @@ public class RegisterActivity extends CommonActivity {
         BuscaCep bCep = new BuscaCep();
 
         try {
-            editEndereco.setText(bCep.getEndereco(sCep));
-            editCidade.setText(bCep.getCidade(sCep));
-            editUf.setText(bCep.getUF(sCep));
+            sEndereco = bCep.getEndereco(sCep);
+            sCidade = bCep.getCidade(sCep);
+            sUf = bCep.getUF(sCep);
+
+            editEndereco.setText(sEndereco);
+            editCidade.setText(sCidade);
+            editUf.setText(sUf);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -150,12 +169,12 @@ public class RegisterActivity extends CommonActivity {
             common.setToastMessage("O campo CPF não pode estar vazio");
             focusView = editCpf;
             cancel = true;
-        }
+        }/*
         else if (TextUtils.isEmpty(sEstadoCivil)) {
             common.setToastMessage("O campo estado civil não pode estar vazio");
             focusView = editEstadoCivil;
             cancel = true;
-        }
+        }*/
         else if (TextUtils.isEmpty(sCep)) {
             common.setToastMessage("O campo CEP não pode estar vazio");
             focusView = editCep;
@@ -169,16 +188,6 @@ public class RegisterActivity extends CommonActivity {
         else if (TextUtils.isEmpty(sTelPrincipal)) {
             common.setToastMessage("O campo telefone principal não pode estar vazio");
             focusView = editTelPrincipal;
-            cancel = true;
-        }
-        else if (TextUtils.isEmpty(sTelOpcional)) {
-            common.setToastMessage("O campo telefone opcional não pode estar vazio");
-            focusView = editTelOpcional;
-            cancel = true;
-        }
-        else if (TextUtils.isEmpty(sCelular)){
-            common.setToastMessage("O campo celular não pode estar vazio");
-            focusView = editCelular;
             cancel = true;
         }
         else if (TextUtils.isEmpty(sEmail)){
@@ -197,8 +206,8 @@ public class RegisterActivity extends CommonActivity {
             cancel = true;
         }
 
-        else if(sSenha != sConfirmaSenha ){
-            common.setToastMessage("A confirmação de senha precisa ser igual a senha");
+        else if(!sSenha.equals(sConfirmaSenha) ){
+            common.setToastMessage("A confirmação de senha precisa ser igual a senha" + sSenha + " " + sConfirmaSenha);
             focusView = editConfirmaSenha;
             cancel = true;
         }
