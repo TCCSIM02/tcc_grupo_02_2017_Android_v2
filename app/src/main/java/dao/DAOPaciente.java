@@ -16,6 +16,7 @@ import to.TOPaciente;
 
 public class DAOPaciente {
 
+
     public void cadastrarPaciente(TOPaciente toPaciente){
         String sqlInsert = "INSERT INTO tcc.paciente(numeroEndereco,numConvenio,nomePaciente,cPF,dataNascimento,email,estadoCivil,nacionalidade,endereco,cEP,cidade,uF,pais,tel1,tel2,cel,dataCadastro) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,current_timestamp())";
         // usando o try with resources do Java 7, que fecha o que abriu

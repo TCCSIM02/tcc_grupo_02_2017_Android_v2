@@ -13,7 +13,7 @@ import java.net.SocketTimeoutException;
 public class BuscaCep {
 
     public String getEndereco(String CEP) throws IOException {
-
+    //https://viacep.com.br/ws/08255640/json/?callback=meu_callback
         // ***************************************************
         try {
 

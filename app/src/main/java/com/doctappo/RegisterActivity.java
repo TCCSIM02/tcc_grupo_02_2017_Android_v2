@@ -4,10 +4,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.StrictMode;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
@@ -18,6 +21,7 @@ import java.util.HashMap;
 import Config.ApiParams;
 import models.ModelLogin;
 import models.ModelPaciente;
+import util.BuscaCep;
 import util.Mask;
 
 public class RegisterActivity extends CommonActivity {
@@ -48,6 +52,10 @@ public class RegisterActivity extends CommonActivity {
         setContentView(R.layout.activity_register);
         allowBack();
         setHeaderTitle(getString(R.string.register_new));
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
+        StrictMode.setThreadPolicy(policy);
 
         editNome = (EditText)findViewById(R.id.txtFirstname);
         editNumeroConvenio = (EditText)findViewById(R.id.txtNumeroEndereco);
@@ -89,7 +97,7 @@ public class RegisterActivity extends CommonActivity {
             }
         });
     }
-    public void register(){
+    public void register() {
 
         boolean cancel = false;
         View focusView = null;
@@ -112,45 +120,134 @@ public class RegisterActivity extends CommonActivity {
         String sSenha = editSenha.getText().toString();
         String sConfirmaSenha = editConfirmaSenha.getText().toString();
 
-        ModelLogin modelLogin = new ModelLogin(sNomeUsuario, sEmail, sSenha);
+        BuscaCep bCep = new BuscaCep();
+
         try {
-            modelLogin.cadastrarLogin();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
+            editEndereco.setText(bCep.getEndereco(sCep));
+            editCidade.setText(bCep.getCidade(sCep));
+            editUf.setText(bCep.getUF(sCep));
+        } catch (IOException e) {
             e.printStackTrace();
         }
 
-        int id = -1;
-        SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
-        java.sql.Date dataNasc = null;
-
-        try {
-            dataNasc = new java.sql.Date(format.parse(sDataNascimento).getTime());
-        } catch (ParseException e) {
-            e.printStackTrace();
+        // Validação dos campos
+        if (TextUtils.isEmpty(sNome)) {
+            common.setToastMessage("O campo nome não pode estar vazio");
+            focusView = editNome;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sDataNascimento)) {
+            common.setToastMessage("O campo data de nascimento não pode estar vazio");
+            focusView = editDataNascimento;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sNumeroConvenio)) {
+            common.setToastMessage("O número do convênio não pode estar vazio");
+            focusView = editNumeroConvenio;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sCpf)) {
+            common.setToastMessage("O campo CPF não pode estar vazio");
+            focusView = editCpf;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sEstadoCivil)) {
+            common.setToastMessage("O campo estado civil não pode estar vazio");
+            focusView = editEstadoCivil;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sCep)) {
+            common.setToastMessage("O campo CEP não pode estar vazio");
+            focusView = editCep;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sNumeroEndereco)) {
+            common.setToastMessage("O campo numero não pode estar vazio");
+            focusView = editNumeroEndereco;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sTelPrincipal)) {
+            common.setToastMessage("O campo telefone principal não pode estar vazio");
+            focusView = editTelPrincipal;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sTelOpcional)) {
+            common.setToastMessage("O campo telefone opcional não pode estar vazio");
+            focusView = editTelOpcional;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sCelular)){
+            common.setToastMessage("O campo celular não pode estar vazio");
+            focusView = editCelular;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sEmail)){
+            common.setToastMessage("O campo email não pode estar vazio");
+            focusView = editEmail;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sSenha)) {
+            common.setToastMessage("O campo senha não pode estar vazio");
+            focusView = editSenha;
+            cancel = true;
+        }
+        else if (TextUtils.isEmpty(sConfirmaSenha)) {
+            common.setToastMessage("A confirmação de senha não pode estar vazia");
+            focusView = editConfirmaSenha;
+            cancel = true;
         }
 
-        ModelPaciente modelPaciente = new ModelPaciente(
-                sNumeroEndereco, null, sNome,
-                sCpf, dataNasc,  sEstadoCivil, sEmail,
-                "Brasileiro",  sEndereco, sCep,  sCidade,
-                sUf,  "Brasil",  sTelPrincipal,  sTelOpcional,  sCelular,
-                "1", id,  sNumeroConvenio);
-
-        int codLoginCadastrado = 0;
-        try {
-            codLoginCadastrado = modelLogin.getCodLoginCadastrado();
-        } catch (NoSuchAlgorithmException e) {
-            e.printStackTrace();
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+        else if(sSenha != sConfirmaSenha ){
+            common.setToastMessage("A confirmação de senha precisa ser igual a senha");
+            focusView = editConfirmaSenha;
+            cancel = true;
         }
+        else {
 
-        modelPaciente.codLoginCadastrado = codLoginCadastrado;
+            ModelLogin modelLogin = new ModelLogin(sNomeUsuario, sEmail, sSenha);
+            try {
+                modelLogin.cadastrarLogin();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
 
-        modelPaciente.cadastrarPaciente();
+            int id = -1;
+            SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            java.sql.Date dataNasc = null;
+
+            try {
+                dataNasc = new java.sql.Date(format.parse(sDataNascimento).getTime());
+            } catch (ParseException e) {
+                e.printStackTrace();
+            }
+
+            ModelPaciente modelPaciente = new ModelPaciente(
+                    sNumeroEndereco, null, sNome,
+                    sCpf, dataNasc, sEstadoCivil, sEmail,
+                    "Brasileiro", sEndereco, sCep, sCidade,
+                    sUf, "Brasil", sTelPrincipal, sTelOpcional, sCelular,
+                    "1", id, sNumeroConvenio);
+
+            int codLoginCadastrado = 0;
+            try {
+                codLoginCadastrado = modelLogin.getCodLoginCadastrado();
+            } catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            } catch (UnsupportedEncodingException e) {
+                e.printStackTrace();
+            }
+
+            modelPaciente.codLoginCadastrado = codLoginCadastrado;
+
+            modelPaciente.cadastrarPaciente();
+
+            common.setToastMessage("Usuário cadastrado com successo");
+
+        }
     }
+
     public final static boolean isValidEmail(CharSequence target) {
         if (target == null) {
             return false;
