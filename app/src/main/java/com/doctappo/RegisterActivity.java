@@ -252,7 +252,8 @@ public class RegisterActivity extends CommonActivity {
 
             modelPaciente.cadastrarPaciente();
 
-            common.setToastMessage("Usuário cadastrado com successo");
+            Intent intent = new Intent(RegisterActivity.this,MainActivity.class);
+            startActivity(intent);
 
         }
     }

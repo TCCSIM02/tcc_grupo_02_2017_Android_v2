@@ -8,6 +8,10 @@
             android:icon="@drawable/ic_menu_profile"
             android:title="@string/nav_update_profile" />
         <item
+            android:id="@+id/nav_novo_usuario"
+            android:icon="@drawable/ic_menu_profile"
+            android:title="Novo usuário" />
+        <item
             android:id="@+id/nav_password"
             android:icon="@drawable/ic_menu_password"
             android:title="@string/nav_change_password" />
