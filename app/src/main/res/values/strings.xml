@@ -103,4 +103,10 @@
     <string name="doacao_sangue">Minha Saúde</string>
     <string name="vacinas">Carteira de Vacinas</string>
     <string name="minha_saude">Doação de sangue</string>
+
+    <string name="title_activity_fullscreen">FullscreenActivity</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
+
+    <string name="title_activity_splash_screen">SplashScreenActivity</string>
 </resources>

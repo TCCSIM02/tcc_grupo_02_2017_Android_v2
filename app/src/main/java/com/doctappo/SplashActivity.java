@@ -1,16 +1,15 @@
 package com.doctappo;
 
-import android.*;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
+import android.os.Bundle;
 import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
+import android.widget.ImageView;
 
 public class SplashActivity extends CommonActivity {
     public static final int MY_PERMISSIONS_REQUEST_WRITE_FIELS = 102;
@@ -18,9 +17,14 @@ public class SplashActivity extends CommonActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        /*getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
         checkAppPermissions();
+
+        ImageView img = (ImageView)findViewById(R.id.imgViewSplashScreen);
+
     }
     public void checkAppPermissions(){
         if (ContextCompat.checkSelfPermission(this,

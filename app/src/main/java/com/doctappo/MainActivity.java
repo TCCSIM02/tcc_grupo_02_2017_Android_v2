@@ -264,7 +264,7 @@ public class MainActivity extends CommonActivity implements GoogleApiClient.Conn
             startActivity(intent);
 
         } else if (id == R.id.nav_novo_usuario) {
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            Intent intent = new Intent(MainActivity.this, SplashActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_appointment) {

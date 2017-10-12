@@ -7,4 +7,6 @@
     <color name="colorTextWhite">#ffffff</color>
     <color name="colorTextDark">#484848</color>
     <color name="colorTextDarkGray">#787878</color>
+
+    <color name="black_overlay">#66000000</color>
 </resources>
