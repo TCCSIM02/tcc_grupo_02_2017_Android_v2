@@ -298,7 +298,7 @@ public class MainActivity extends CommonActivity implements GoogleApiClient.Conn
         //lon = localAtual.getLongitude();
 
         map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(lat, lon), 12));
+                new LatLng(lat, lon), 15));
 
         // You can customize the marker image using images bundled with
         // your app, or dynamically generated bitmaps.
@@ -325,7 +325,7 @@ public class MainActivity extends CommonActivity implements GoogleApiClient.Conn
                     "\nEndereço: " + listaUnidade.get(i).getEndereco() +", "+listaUnidade.get(i).getNumeroEndereco() +
                     "\nCEP: " + listaUnidade.get(i).getCep() +
                     "\nTelefone: " + listaUnidade.get(i).getTel1()
-            ).icon(BitmapDescriptorFactory.fromResource(R.drawable.doctors)));
+            ).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_icon_coracao)));
 
             map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
