@@ -80,24 +80,6 @@ public class MainActivity extends CommonActivity implements  NavigationView.OnNa
         //actv.setTextColor(Color.RED);
     }
 
-    /*public void bindView() {
-        categoryRecyclerView = (RecyclerView) findViewById(R.id.rv_artist);
-        GridLayoutManager layoutManager
-                = new GridLayoutManager(this, 3);
-        categoryRecyclerView.setLayoutManager(layoutManager);
-
-        categoryAdapter = new CategoryAdapter(this, categoryArray);
-        categoryRecyclerView.setAdapter(categoryAdapter);
-        progressBar1 = (ProgressBar) findViewById(R.id.progressBar1);
-        setProgressBarAnimation(progressBar1);
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.setDrawerListener(toggle);
-        toggle.syncState();
-    }*/
-
     @Override
     protected void onResume() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
