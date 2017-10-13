@@ -249,5 +249,9 @@ public class MainActivity extends CommonActivity implements  NavigationView.OnNa
         }
     }
 
+    public void onMapIconClick(MenuItem item) {
+        Intent intent = new Intent(MainActivity.this, SplashActivity.class);
+        startActivity(intent);
+    }
 }
 

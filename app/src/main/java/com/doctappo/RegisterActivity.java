@@ -267,24 +267,24 @@ public class RegisterActivity extends CommonActivity {
     }
     private final Handler handler = new Handler() {
         public void handleMessage(Message message) {
-            if (message.getData().containsKey(ApiParams.PARM_RESPONCE)){
-                if (message.getData().getBoolean(ApiParams.PARM_RESPONCE)){
-                    ArrayList<HashMap<String,String>> loginArray =  (ArrayList<HashMap<String,String>>) message.getData().getSerializable(ApiParams.PARM_DATA);
-                    if(loginArray!=null) {
-                        HashMap<String, String> userdata = loginArray.get(0);
-                        Intent intent = null;
-                        common.setSession(ApiParams.COMMON_KEY, userdata.get("user_id"));
-                        common.setSession(ApiParams.USER_FULLNAME, userdata.get("user_fullname"));
-                        common.setSession(ApiParams.USER_EMAIL, userdata.get("user_email"));
-                        common.setSession(ApiParams.USER_PHONE,userdata.get("user_phone"));
-                        intent = new Intent(RegisterActivity.this, MainActivity.class);
-                        startActivity(intent);
-                        finish();
-                    }
-                }else{
-                    common.setToastMessage(message.getData().getString(ApiParams.PARM_ERROR));
+        if (message.getData().containsKey(ApiParams.PARM_RESPONCE)){
+            if (message.getData().getBoolean(ApiParams.PARM_RESPONCE)){
+                ArrayList<HashMap<String,String>> loginArray =  (ArrayList<HashMap<String,String>>) message.getData().getSerializable(ApiParams.PARM_DATA);
+                if(loginArray!=null) {
+                    HashMap<String, String> userdata = loginArray.get(0);
+                    Intent intent = null;
+                    common.setSession(ApiParams.COMMON_KEY, userdata.get("user_id"));
+                    common.setSession(ApiParams.USER_FULLNAME, userdata.get("user_fullname"));
+                    common.setSession(ApiParams.USER_EMAIL, userdata.get("user_email"));
+                    common.setSession(ApiParams.USER_PHONE,userdata.get("user_phone"));
+                    intent = new Intent(RegisterActivity.this, MainActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
+            }else{
+                common.setToastMessage(message.getData().getString(ApiParams.PARM_ERROR));
             }
+        }
         }
     };
 }

@@ -12,6 +12,10 @@
             android:icon="@drawable/ic_menu_profile"
             android:title="Novo usuário" />
         <item
+            android:id="@+id/nav_info_historica"
+            android:icon="@drawable/ic_menu_profile"
+            android:title="Informações históricas" />
+        <item
             android:id="@+id/nav_password"
             android:icon="@drawable/ic_menu_password"
             android:title="@string/nav_change_password" />
