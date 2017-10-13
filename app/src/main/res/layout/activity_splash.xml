@@ -14,15 +14,11 @@
 
     <ImageView
         android:id="@+id/imgViewSplashScreen"
-        android:layout_width="753px"
-        android:layout_height="500px"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginBottom="97dp"
+        android:layout_width="600px"
+        android:layout_height="398px"
         android:background="@drawable/splashscreen_image"
-        android:paddingLeft="50dp"
-        android:paddingRight="50dp"
         android:scaleType="center"
-        app:srcCompat="@drawable/background_tab" />
+        app:srcCompat="@drawable/background_tab"
+        android:layout_centerVertical="true"
+        android:layout_centerHorizontal="true" />
 </RelativeLayout>

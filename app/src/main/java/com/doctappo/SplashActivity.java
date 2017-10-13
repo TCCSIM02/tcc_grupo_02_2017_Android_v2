@@ -9,7 +9,9 @@ import android.provider.Settings;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AlertDialog;
-import android.widget.ImageView;
+
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class SplashActivity extends CommonActivity {
     public static final int MY_PERMISSIONS_REQUEST_WRITE_FIELS = 102;
@@ -17,13 +19,19 @@ public class SplashActivity extends CommonActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        /*getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);*/
         setContentView(R.layout.activity_splash);
         getSupportActionBar().hide();
-        checkAppPermissions();
+        //checkAppPermissions();
 
-        ImageView img = (ImageView)findViewById(R.id.imgViewSplashScreen);
+        new Timer().schedule(new TimerTask() {
+            @Override
+            public void run() {
+                // this code will be executed after 2 seconds
+                go_next();
+            }
+        }, 1500);
+
+        //ImageView img = (ImageView)findViewById(R.id.imgViewSplashScreen);
 
     }
     public void checkAppPermissions(){

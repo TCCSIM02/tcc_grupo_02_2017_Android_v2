@@ -6,6 +6,6 @@
         android:id="@+id/action_location"
         android:orderInCategory="100"
         android:title="@string/action_settings"
-        android:icon="@drawable/ic_location"
+        android:icon="@drawable/map_icon_cor_branco"
         app:showAsAction="always" />
 </menu>
