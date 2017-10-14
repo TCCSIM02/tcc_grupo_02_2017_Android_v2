@@ -5,7 +5,7 @@
     <item
         android:id="@+id/action_location"
         android:orderInCategory="100"
-        android:title="@string/action_settings"
+        android:title="Coração"
         android:icon="@drawable/map_icon_cor_branco"
         android:onClick="onMapIconClick"
         app:showAsAction="always" />

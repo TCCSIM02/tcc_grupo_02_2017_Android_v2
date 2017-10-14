@@ -109,4 +109,6 @@
     <string name="dummy_content">DUMMY\nCONTENT</string>
 
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
+    <string name="title_activity_cadastro">CadastroActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
 </resources>

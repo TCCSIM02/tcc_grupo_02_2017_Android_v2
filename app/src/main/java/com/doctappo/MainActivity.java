@@ -50,9 +50,7 @@ public class MainActivity extends CommonActivity implements  NavigationView.OnNa
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
-                .permitAll().build();
-        StrictMode.setThreadPolicy(policy);
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -78,6 +76,11 @@ public class MainActivity extends CommonActivity implements  NavigationView.OnNa
         actv.setThreshold(1);//will start working from first character
         actv.setAdapter(adapter);//setting the adapter data into the AutoCompleteTextView
         //actv.setTextColor(Color.RED);
+
+        StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
+                .permitAll().build();
+        StrictMode.setThreadPolicy(policy);
+
     }
 
     @Override
@@ -158,6 +161,9 @@ public class MainActivity extends CommonActivity implements  NavigationView.OnNa
 
         } else if (id == R.id.nav_novo_usuario) {
             Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        } else if (id == R.id.nav_info_historica) {
+            Intent intent = new Intent(MainActivity.this,   CadastroActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_appointment) {
