@@ -75,7 +75,7 @@ public class MapFragment extends Fragment   implements OnMapReadyCallback {
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_icon))
                     .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
                     .title("Sua posição")
-                    .draggable(true)
+                    //.draggable(true)
                     .position(new LatLng(cur_latitude, cur_longitude)));
         }
     }

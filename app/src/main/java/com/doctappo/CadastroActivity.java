@@ -36,8 +36,7 @@ public class CadastroActivity extends CommonActivity {
         setHeaderTitle("Cadastro de usuário");
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
-        //getSupportActionBar().setTitle("Cadastro de usuário");
-        getSupportActionBar().setDisplayShowHomeEnabled(false);
+        //getSupportActionBar().setDisplayShowHomeEnabled(false);
         // Create the adapter that will return a fragment for each of the three
         // primary sections of the activity.
         mSectionsPagerAdapter = new SectionsPagerAdapter(getSupportFragmentManager());

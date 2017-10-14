@@ -17,8 +17,10 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -98,7 +100,6 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View navHeader = navigationView.getHeaderView(0);
         ((TextView) navHeader.findViewById(R.id.menu_title)).setTypeface(common.getCustomFont());
-
 
         navigationView.setNavigationItemSelectedListener(this);
         Menu nav_Menu = navigationView.getMenu();
@@ -207,11 +208,13 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         for(int i = 0; i < listaUnidade.size();i++){
 
             map.addMarker(new MarkerOptions().position(new LatLng(listaUnidade.get(i).getLatitude(), listaUnidade.get(i).getLongitude()))
-                    .title("Rede: " + listaUnidade.get(i).getNomeRede()).snippet(listaUnidade.get(i).getNomeFantasia() +
+                    .title("Rede: " + listaUnidade.get(i).getNomeRede())
+                    .snippet(listaUnidade.get(i).getNomeFantasia() +
                     "\nEndereço: " + listaUnidade.get(i).getEndereco() +", "+listaUnidade.get(i).getNumeroEndereco() +
                     "\nCEP: " + listaUnidade.get(i).getCep() +
-                    "\nTelefone: " + listaUnidade.get(i).getTel1()
-            ).icon(BitmapDescriptorFactory.fromResource(R.drawable.map_icon_coracao)));
+                    "\nTelefone: " + listaUnidade.get(i).getTel1() + "\n")
+                    .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_icon_coracao))
+                    );
 
             map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
@@ -238,10 +241,29 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
                     snippet.setTextColor(Color.GRAY);
                     snippet.setText(marker.getSnippet());
 
+                    TextView id = new TextView(context);
+                    //id.setTextColor(Color.GRAY);
+                    //id.setText(marker.getId());
+
+                    Button btnUnidade = new Button(context);
+                    btnUnidade.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
+                    btnUnidade.setTextColor(Color.WHITE);
+                    btnUnidade.setText("Agende conosco ;)");
+
                     info.addView(title);
                     info.addView(snippet);
 
+                    if(!marker.getTitle().equals("Sua posição")) {
+                        info.addView(btnUnidade);
+                    }
                     return info;
+                }
+            });
+
+            map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                public void onInfoWindowClick(Marker marker)
+                {
+                    Toast.makeText(getApplicationContext(), "Click no botao: " + marker.getId() + " "  + marker.getTitle(),  Toast.LENGTH_SHORT).show();
                 }
             });
         }
