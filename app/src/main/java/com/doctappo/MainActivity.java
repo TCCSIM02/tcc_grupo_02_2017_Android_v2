@@ -9,7 +9,6 @@ import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Gravity;
 import android.view.Menu;
@@ -19,10 +18,8 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
 import android.widget.LinearLayout;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -33,23 +30,36 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 import Config.ApiParams;
-import adapters.CategoryAdapter;
 import models.CategoryModel;
 import models.ModelUnidade;
 import to.TOUnidade;
 
-public class MainActivity extends CommonActivity implements  NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
+public class MainActivity extends CommonActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
 
     ArrayList<CategoryModel> categoryArray;
-    RecyclerView categoryRecyclerView;
-    CategoryAdapter categoryAdapter;
-    ProgressBar progressBar1;
     Toolbar toolbar;
 
     protected Context context;
 
+    /**
+     * Request code for location permission request.
+     *
+     * @see #onRequestPermissionsResult(int, String[], int[])
+     */
+    private static final int LOCATION_PERMISSION_REQUEST_CODE = 1;
+
+    /**
+     * Flag indicating whether a requested permission has been denied after returning in
+     * {@link #onRequestPermissionsResult(int, String[], int[])}.
+     */
+    private boolean mPermissionDenied = false;
+
+    private GoogleMap mMap;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -57,20 +67,20 @@ public class MainActivity extends CommonActivity implements  NavigationView.OnNa
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
 
-        setHeaderTitle(getString(R.string.app_name));
-
         com.google.android.gms.maps.MapFragment mapFragment = (com.google.android.gms.maps.MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        setHeaderTitle(getString(R.string.app_name));
+
         categoryArray = new ArrayList<>();
 
         //AutoCOmpletetextView
-        String[] language = {"Odontologista", "Cardiologista", "Oftamologista", "Ginecologista", "Radiologista", "Otorrinolaringologista", "Pediatra", "Geriatra"};
+        String[] busca = {"Odontologista", "Cardiologista", "Oftamologista", "Ginecologista", "Radiologista", "Otorrinolaringologista", "Pediatra", "Geriatra"};
 
         //Creating the instance of ArrayAdapter containing list of language names
         ArrayAdapter<String> adapter = new ArrayAdapter<String>
-                (this, android.R.layout.select_dialog_item, language);
+                (this, android.R.layout.select_dialog_item, busca);
         //Getting the instance of AutoCompleteTextView
         AutoCompleteTextView actv = (AutoCompleteTextView) findViewById(R.id.autoCompleteTextView);
         actv.setThreshold(1);//will start working from first character
@@ -127,7 +137,7 @@ public class MainActivity extends CommonActivity implements  NavigationView.OnNa
         // Handle item selection
         switch (item.getItemId()) {
             case R.id.action_location:
-
+                onCoracaoIconClick();
                 return true;
 
             default:
@@ -183,26 +193,8 @@ public class MainActivity extends CommonActivity implements  NavigationView.OnNa
     }
 
     public void onMapReady(GoogleMap map) {
-        Double lat = Double.parseDouble("-23.5453814");/*selected_salon.getBus_latitude() -23.5453814 40.758899*/
-        Double lon = Double.parseDouble("-46.436167");/*selected_salon.getBus_longitude() -46.436167 -73.9873197*/
 
-        //Location localAtual = new Location();
-
-        //lat = localAtual.getLatitude();
-        //lon = localAtual.getLongitude();
-
-        map.moveCamera(CameraUpdateFactory.newLatLngZoom(
-                new LatLng(lat, lon), 15));
-
-        // You can customize the marker image using images bundled with
-        // your app, or dynamically generated bitmaps.
-
-        map.addMarker(new MarkerOptions()
-                .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_icon))
-                .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
-                .title(/*selected_salon.getBus_title()*/"Você")
-                .position(new LatLng(lat, lon)));
-
+        /* BUSCA UNIDADES */
         ModelUnidade modelUnidade = new ModelUnidade();
 
         ArrayList<TOUnidade> listaUnidade = null;
@@ -255,7 +247,7 @@ public class MainActivity extends CommonActivity implements  NavigationView.OnNa
         }
     }
 
-    public void onMapIconClick(MenuItem item) {
+    public void onCoracaoIconClick(){
         Intent intent = new Intent(MainActivity.this, SplashActivity.class);
         startActivity(intent);
     }

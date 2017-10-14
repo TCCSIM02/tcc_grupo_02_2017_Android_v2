@@ -7,6 +7,5 @@
         android:orderInCategory="100"
         android:title="Coração"
         android:icon="@drawable/map_icon_cor_branco"
-        android:onClick="onMapIconClick"
         app:showAsAction="always" />
 </menu>
