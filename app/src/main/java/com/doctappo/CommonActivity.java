@@ -16,10 +16,6 @@ import android.widget.TextView;
 
 import util.CommonClass;
 
-/**
- * Created by subhashsanghani on 5/22/17.
- */
-
 public abstract class CommonActivity extends AppCompatActivity {
     public CommonClass common;
     @Override

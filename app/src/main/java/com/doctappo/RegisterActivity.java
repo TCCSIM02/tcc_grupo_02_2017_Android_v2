@@ -63,8 +63,8 @@ public class RegisterActivity extends CommonActivity {
                 "Casado",
                 "Separado",
                 "Divorciado",
-                "Viúvo"
-        });
+                "Viúvo"}
+        );
         spinnerEstadoCivil.setAdapter(adapter);
 
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()

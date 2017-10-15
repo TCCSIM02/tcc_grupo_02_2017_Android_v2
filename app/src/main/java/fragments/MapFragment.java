@@ -11,9 +11,7 @@ import com.doctappo.R;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
@@ -22,7 +20,7 @@ import models.BusinessModel;
 import util.CommonClass;
 import util.GPSTracker;
 
-public class MapFragment extends Fragment   implements OnMapReadyCallback {
+public class MapFragment extends Fragment implements OnMapReadyCallback {
     CommonClass common;
     ArrayList<BusinessModel> postItems;
     String PREF_BUSINESS = "pref_business";
@@ -30,6 +28,7 @@ public class MapFragment extends Fragment   implements OnMapReadyCallback {
     Double cur_latitude, cur_longitude;
 
     Activity act;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -40,17 +39,16 @@ public class MapFragment extends Fragment   implements OnMapReadyCallback {
 
 
         gpsTracker = new GPSTracker(act);
-        if (gpsTracker.canGetLocation())
-        {
-            if(gpsTracker.getLatitude()!=0.0)
-                cur_latitude =	gpsTracker.getLatitude();
-            if(gpsTracker.getLongitude()!=0.0)
+        if (gpsTracker.canGetLocation()) {
+            if (gpsTracker.getLatitude() != 0.0)
+                cur_latitude = gpsTracker.getLatitude();
+            if (gpsTracker.getLongitude() != 0.0)
                 cur_longitude = gpsTracker.getLongitude();
-        }else{
+        } else {
             gpsTracker.showSettingsAlert();
         }
 
-        return  rootView;
+        return rootView;
     }
 
     @Override
@@ -71,12 +69,12 @@ public class MapFragment extends Fragment   implements OnMapReadyCallback {
 
             // You can customize the marker image using images bundled with
             // your app, or dynamically generated bitmaps.
-            map.addMarker(new MarkerOptions()
+            /*map.addMarker(new MarkerOptions()
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_marker_icon))
                     .anchor(0.0f, 1.0f) // Anchors the marker on the bottom left
                     .title("Sua posição")
                     //.draggable(true)
-                    .position(new LatLng(cur_latitude, cur_longitude)));
+                    .position(new LatLng(cur_latitude, cur_longitude)));*/
         }
     }
 }

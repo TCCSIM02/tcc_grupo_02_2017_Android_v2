@@ -2,11 +2,13 @@ package com.doctappo;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.StrictMode;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
@@ -20,7 +22,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -195,6 +196,21 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
     public void onMapReady(GoogleMap map) {
 
+        if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+
+            common.setToastMessage("Conceda as permissões de localização");
+            return;
+        }
+        map.setMyLocationEnabled(true);
+
+
         /* BUSCA UNIDADES */
         ModelUnidade modelUnidade = new ModelUnidade();
 
@@ -207,14 +223,15 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
         for(int i = 0; i < listaUnidade.size();i++){
 
-            map.addMarker(new MarkerOptions().position(new LatLng(listaUnidade.get(i).getLatitude(), listaUnidade.get(i).getLongitude()))
-                    .title("Rede: " + listaUnidade.get(i).getNomeRede())
-                    .snippet(listaUnidade.get(i).getNomeFantasia() +
-                    "\nEndereço: " + listaUnidade.get(i).getEndereco() +", "+listaUnidade.get(i).getNumeroEndereco() +
-                    "\nCEP: " + listaUnidade.get(i).getCep() +
-                    "\nTelefone: " + listaUnidade.get(i).getTel1() + "\n")
+            Marker markerUnidade = map.addMarker(new MarkerOptions().position(new LatLng(listaUnidade.get(i).getLatitude(), listaUnidade.get(i).getLongitude()))
+                    .title(listaUnidade.get(i).getNomeFantasia())
+                    .snippet("Endereço: " + listaUnidade.get(i).getEndereco() +", "+listaUnidade.get(i).getNumeroEndereco() +
+                            "\nCEP: " + listaUnidade.get(i).getCep() +
+                            "\nTelefone: " + listaUnidade.get(i).getTel1() + "\n")
                     .icon(BitmapDescriptorFactory.fromResource(R.drawable.map_icon_coracao))
                     );
+
+            markerUnidade.setTag(listaUnidade.get(i));
 
             map.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
 
@@ -241,10 +258,6 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
                     snippet.setTextColor(Color.GRAY);
                     snippet.setText(marker.getSnippet());
 
-                    TextView id = new TextView(context);
-                    //id.setTextColor(Color.GRAY);
-                    //id.setText(marker.getId());
-
                     Button btnUnidade = new Button(context);
                     btnUnidade.setBackgroundColor(getResources().getColor(R.color.colorPrimary));
                     btnUnidade.setTextColor(Color.WHITE);
@@ -260,10 +273,18 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
                 }
             });
 
+            final ArrayList<TOUnidade> finalListaUnidade = listaUnidade;
             map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 public void onInfoWindowClick(Marker marker)
                 {
-                    Toast.makeText(getApplicationContext(), "Click no botao: " + marker.getId() + " "  + marker.getTitle(),  Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(MainActivity.this, CriarAgendamentoActivity.class);
+
+                    TOUnidade unidade = (TOUnidade) marker.getTag();
+
+                    intent.putExtra("codUnidade",unidade.getCodUnidade());
+                    intent.putExtra("nomeFantasiaUnidade", unidade.getNomeFantasia());
+                    startActivity(intent);
+
                 }
             });
         }

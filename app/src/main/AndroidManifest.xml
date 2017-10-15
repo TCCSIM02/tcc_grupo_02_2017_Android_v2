@@ -100,7 +100,10 @@
         </activity>
         <activity
             android:name=".CadastroActivity"
-            android:configChanges="orientation|screenSize" ></activity>
+            android:configChanges="orientation|screenSize" />
+        <activity
+            android:name=".CriarAgendamentoActivity"
+            android:configChanges="orientation|screenSize" />
     </application>
 
 </manifest>
