@@ -26,6 +26,5 @@ public class ConfirmarAgendamentoActivity extends CommonActivity {
         txtDataAgendamento.setText(this.getIntent().getStringExtra("dataAgendamento"));
         txtHorario.setText(this.getIntent().getStringExtra("spinnerHorario"));
 
-        
     }
 }
