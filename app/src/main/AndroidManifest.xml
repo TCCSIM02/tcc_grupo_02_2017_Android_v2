@@ -104,6 +104,7 @@
         <activity
             android:name=".CriarAgendamentoActivity"
             android:configChanges="orientation|screenSize" />
+        <activity android:name=".ConfirmarAgendamentoActivity"></activity>
     </application>
 
 </manifest>

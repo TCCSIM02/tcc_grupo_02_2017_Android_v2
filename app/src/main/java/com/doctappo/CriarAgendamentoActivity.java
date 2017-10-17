@@ -1,11 +1,13 @@
 package com.doctappo;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -26,7 +28,8 @@ public class CriarAgendamentoActivity extends CommonActivity {
         allowBack();
         setHeaderTitle("Agende");
 
-        TextView txtUnidade = (TextView)  findViewById(R.id.txtUnidade);
+        //final int codUnidade = Integer.parseInt(this.getIntent().getStringExtra("codUnidade"));
+        final TextView txtUnidade = (TextView)  findViewById(R.id.txtUnidade);
 
         txtUnidade.setText(this.getIntent().getStringExtra("nomeFantasiaUnidade"));
 
@@ -177,5 +180,26 @@ public class CriarAgendamentoActivity extends CommonActivity {
         };
 
         spinnerHorario.setAdapter(adpterHorario);
+
+        Button btnAvancar = (Button)  findViewById(R.id.btnAvancarAgendamento);
+
+        btnAvancar.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // calender class's instance and get current date , month and year from calender
+                        Intent intent = new Intent(CriarAgendamentoActivity.this, ConfirmarAgendamentoActivity.class);
+                        //intent.putExtra("codUnidade",codUnidade);
+                        intent.putExtra("nomeFantasiaUnidade",txtUnidade.getText());
+                        intent.putExtra("spinnerEspecialidade",spinnerEspecialidade.getSelectedItem().toString());
+                        intent.putExtra("spinnerMedico",spinnerMedico.getSelectedItem().toString());
+                        intent.putExtra("dataAgendamento",dataAgendamento.getText());
+                        intent.putExtra("spinnerHorario",spinnerHorario.getSelectedItem().toString());
+                        startActivity(intent);
+                    }
+                }
+        );
+
+
     }
 }

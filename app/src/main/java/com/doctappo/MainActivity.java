@@ -273,7 +273,6 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
                 }
             });
 
-            final ArrayList<TOUnidade> finalListaUnidade = listaUnidade;
             map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
                 public void onInfoWindowClick(Marker marker)
                 {
