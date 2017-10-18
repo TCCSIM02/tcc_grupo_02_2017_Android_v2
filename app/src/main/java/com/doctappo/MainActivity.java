@@ -12,6 +12,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -93,6 +94,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
+
 
     }
 
@@ -219,6 +221,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             listaUnidade = modelUnidade.listarUnidadesMap();
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
+            Log.e("Lista Unidade" ,"Erro ao listar unidade");
         }
 
         for(int i = 0; i < listaUnidade.size();i++){

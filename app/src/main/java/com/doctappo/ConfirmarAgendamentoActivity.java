@@ -1,6 +1,9 @@
 package com.doctappo;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 public class ConfirmarAgendamentoActivity extends CommonActivity {
@@ -11,8 +14,6 @@ public class ConfirmarAgendamentoActivity extends CommonActivity {
         setContentView(R.layout.activity_confirmar_agendamento);
         allowBack();
         setHeaderTitle("Confirmar agendamento");
-
-        //int codUnidade = Integer.parseInt(this.getIntent().getStringExtra("codUnidade"));
 
         TextView txtUnidade = (TextView)findViewById(R.id.txtUnidade);
         TextView txtEspecialidade = (TextView) findViewById(R.id.txtEspecialidade);
@@ -26,5 +27,17 @@ public class ConfirmarAgendamentoActivity extends CommonActivity {
         txtDataAgendamento.setText(this.getIntent().getStringExtra("dataAgendamento"));
         txtHorario.setText(this.getIntent().getStringExtra("spinnerHorario"));
 
+        Button btnCancelar = (Button)  findViewById(R.id.btnCancelar);
+
+        btnCancelar.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // calender class's instance and get current date , month and year from calender
+                        Intent intent = new Intent(ConfirmarAgendamentoActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
     }
 }

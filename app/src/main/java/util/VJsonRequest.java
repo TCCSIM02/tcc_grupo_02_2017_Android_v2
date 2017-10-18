@@ -1,7 +1,6 @@
 package util;
 
 import android.app.Activity;
-import android.support.design.widget.Snackbar;
 import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
@@ -20,17 +19,11 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.doctappo.R;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
 
-
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.lang.reflect.Type;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import Config.ApiParams;
@@ -150,6 +143,7 @@ public class VJsonRequest {
         RequestQueue requestQueue = Volley.newRequestQueue(instance);
         requestQueue.add(request);
     }
+
     public void  checkInternetConncetion(VolleyError volleyError, Activity activity){
         if (volleyError instanceof NetworkError || volleyError instanceof AuthFailureError || volleyError instanceof ParseError || volleyError instanceof NoConnectionError){
             //NoInternetDialog noInternetDialog = new NoInternetDialog(activity);

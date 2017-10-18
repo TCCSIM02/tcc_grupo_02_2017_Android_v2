@@ -11,6 +11,11 @@ import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
 
+import fragments.CadastroContato;
+import fragments.CadastroEndereco;
+import fragments.CadastroPessoal;
+import fragments.CadastroUsuario;
+
 public class CadastroActivity extends CommonActivity {
 
     /**
@@ -105,14 +110,22 @@ public class CadastroActivity extends CommonActivity {
 
         @Override
         public Fragment getItem(int position) {
-            // getItem is called to instantiate the fragment for the given page.
-            // Return a PlaceholderFragment (defined as a static inner class below).
-            return PlaceholderFragment.newInstance(position + 1);
+            switch (position) {
+                case 0:
+                    return new CadastroPessoal();
+                case 1:
+                    return new CadastroEndereco();
+                case 2:
+                    return new CadastroContato();
+                case 3:
+                    return new CadastroUsuario();
+            }
+            return null;
         }
 
         @Override
         public int getCount() {
-            // Show 3 total pages.
+            // Show 4 total pages.
             return 4;
         }
 
