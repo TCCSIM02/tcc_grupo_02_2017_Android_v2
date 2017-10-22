@@ -15,9 +15,7 @@ import android.os.Build;
 import android.util.AttributeSet;
 import android.widget.ImageView;
 
-/**
- * Created by LENOVO on 4/24/2016.
- */
+
 public class RoundedImageView extends ImageView {
 
     public RoundedImageView(Context context) {

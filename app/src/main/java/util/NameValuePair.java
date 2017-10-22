@@ -1,8 +1,5 @@
 package util;
 
-/**
- * Created by subhashsanghani on 9/29/16.
- */
 public class NameValuePair {
     public String name, value;
 

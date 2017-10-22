@@ -14,13 +14,11 @@ import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import util.CommonClass;
-
 public abstract class CommonActivity extends AppCompatActivity {
-    public CommonClass common;
+    //public CommonClass common;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
-        common = new CommonClass(this);
+        //common = new CommonClass(this);
 
         super.onCreate(savedInstanceState);
     }

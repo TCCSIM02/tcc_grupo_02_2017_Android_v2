@@ -1,8 +1,6 @@
 package models;
 
-/**
- * Created by subhashsanghani on 5/25/17.
- */
+
 
 public class AppointmentModel {
     private String id;

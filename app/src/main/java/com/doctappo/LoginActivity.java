@@ -1,31 +1,15 @@
 package com.doctappo;
 
 import android.content.Intent;
-import android.os.Handler;
-import android.os.Message;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import Config.ApiParams;
-import models.ActiveModels;
-import models.BusinessModel;
-import util.NameValuePair;
-import util.VJsonRequest;
+
 
 public class LoginActivity extends CommonActivity {
     EditText editEmail, editPassword;
@@ -53,17 +37,17 @@ public class LoginActivity extends CommonActivity {
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            common.setToastMessage(getString(R.string.valid_required_email));
+            //common.setToastMessage(getString(R.string.valid_required_email));
             focusView = editEmail;
             cancel = true;
         }
         if (!isValidEmail(email)) {
-            common.setToastMessage(getString(R.string.valid_email));
+           // common.setToastMessage(getString(R.string.valid_email));
             focusView = editEmail;
             cancel = true;
         }
         if (TextUtils.isEmpty(password)) {
-            common.setToastMessage(getString(R.string.valid_required_password));
+            //common.setToastMessage(getString(R.string.valid_required_password));
             focusView = editPassword;
             cancel = true;
         }
@@ -78,31 +62,7 @@ public class LoginActivity extends CommonActivity {
             params.put("user_email",email);
             params.put("user_password",password);
 
-            VJsonRequest vJsonRequest = new VJsonRequest(this, ApiParams.LOGIN_URL,params,
-                    new VJsonRequest.VJsonResponce(){
-                        @Override
-                        public void VResponce(String responce) {
 
-                            JSONObject userdata = null;
-                            try {
-                                userdata = new JSONObject(responce);
-
-                                common.setSession(ApiParams.COMMON_KEY,userdata.getString("user_id"));
-                                common.setSession(ApiParams.USER_FULLNAME,userdata.getString("user_fullname"));
-                                common.setSession(ApiParams.USER_EMAIL,userdata.getString("user_email"));
-                                common.setSession(ApiParams.USER_PHONE,userdata.getString("user_phone"));
-
-                                finish();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
-                            }
-
-                        }
-                        @Override
-                        public void VError(String responce) {
-                            common.setToastMessage(responce);
-                        }
-                    });
         }
 
     }
@@ -114,12 +74,12 @@ public class LoginActivity extends CommonActivity {
 
         // Check for a valid email address.
         if (TextUtils.isEmpty(email)) {
-            common.setToastMessage(getString(R.string.valid_required_email));
+            //common.setToastMessage(getString(R.string.valid_required_email));
             focusView = editEmail;
             cancel = true;
         }
         if (!isValidEmail(email)) {
-            common.setToastMessage(getString(R.string.valid_email));
+            //common.setToastMessage(getString(R.string.valid_email));
             focusView = editEmail;
             cancel = true;
         }
@@ -131,18 +91,6 @@ public class LoginActivity extends CommonActivity {
 
 
             params.put("user_email",email);
-
-            VJsonRequest vJsonRequest = new VJsonRequest(this, ApiParams.FORGOT_PASSWORD_URL,params,
-                    new VJsonRequest.VJsonResponce(){
-                        @Override
-                        public void VResponce(String responce) {
-                            common.setToastMessage(responce);
-                        }
-                        @Override
-                        public void VError(String responce) {
-                            common.setToastMessage(responce);
-                        }
-                    });
 
         }
     }

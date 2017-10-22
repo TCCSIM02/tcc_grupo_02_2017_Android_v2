@@ -1,9 +1,5 @@
 package models;
 
-/**
- * Created by subhashsanghani on 5/24/17.
- */
-
 public class SlotsModel {
     private String slot;
     private Boolean is_booked;

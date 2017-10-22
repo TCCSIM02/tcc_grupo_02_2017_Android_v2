@@ -24,7 +24,7 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBJD63gZJ0b3wbK19PIoTTlzNDDv4uCifU" />
 
-        <service android:name="configfcm.MyFirebaseMessagingService">
+       <!-- <service android:name="configfcm.MyFirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
@@ -33,21 +33,21 @@
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
             </intent-filter>
-        </service>
+        </service>-->
         <!--
      Set custom default icon. This is used when no icon is set for incoming notification messages.
      See README(https://goo.gl/l4GJaQ) for more.
         -->
-        <meta-data
+        <!--<meta-data
             android:name="com.google.firebase.messaging.default_notification_icon"
-            android:resource="@drawable/ic_notification" />
+            android:resource="@drawable/ic_notification" />-->
         <!--
              Set color used with incoming notification messages. This is used when no color is set for the incoming
              notification message. See README(https://goo.gl/6BKBk7) for more.
         -->
-        <meta-data
-            android:name="com.google.firebase.messaging.default_notification_color"
-            android:resource="@color/colorAccent" />
+        <!-- <meta-data
+             android:name="com.google.firebase.messaging.default_notification_color"
+             android:resource="@color/colorAccent" />-->
 
         <activity
             android:name=".MainActivity"
@@ -55,41 +55,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".MapActivity" />
         <activity
-            android:name=".ListActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".DetailsSalonActivity"
-            android:configChanges="orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
-        <activity
-            android:name=".TimeSlotActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".ThanksActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".PersonInfoActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|screenSize" />
         <activity
             android:name=".RegisterActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".UpdateProfileActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".ChangePasswordActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".MyAppointmentsActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".SearchActivity"
-            android:configChanges="orientation|screenSize" />
-        <activity
-            android:name=".LocationActivity"
             android:configChanges="orientation|screenSize" />
         <activity android:name=".SplashActivity">
             <intent-filter>

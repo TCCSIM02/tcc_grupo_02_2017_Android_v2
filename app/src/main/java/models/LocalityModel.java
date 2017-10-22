@@ -1,9 +1,5 @@
 package models;
 
-/**
- * Created by subhashsanghani on 5/28/17.
- */
-
 public class LocalityModel {
    private String locality_id;
     private String city_id;

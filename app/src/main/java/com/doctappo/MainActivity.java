@@ -33,7 +33,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-import Config.ApiParams;
 import models.CategoryModel;
 import models.ModelUnidade;
 import to.TOUnidade;
@@ -102,11 +101,11 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
     protected void onResume() {
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         View navHeader = navigationView.getHeaderView(0);
-        ((TextView) navHeader.findViewById(R.id.menu_title)).setTypeface(common.getCustomFont());
+        //((TextView) navHeader.findViewById(R.id.menu_title)).setTypeface(common.getCustomFont());
 
         navigationView.setNavigationItemSelectedListener(this);
         Menu nav_Menu = navigationView.getMenu();
-        if (!common.is_user_login()) {
+        if (1 == 1) {
             nav_Menu.findItem(R.id.nav_novo_usuario).setVisible(true);
             nav_Menu.findItem(R.id.nav_appointment).setVisible(false);
             nav_Menu.findItem(R.id.nav_logout).setVisible(false);
@@ -123,8 +122,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             nav_Menu.findItem(R.id.nav_login).setVisible(false);
             navHeader.findViewById(R.id.txtFullName).setVisibility(View.VISIBLE);
             navHeader.findViewById(R.id.textEmailId).setVisibility(View.VISIBLE);
-            ((TextView) navHeader.findViewById(R.id.txtFullName)).setText(common.getSession(ApiParams.USER_FULLNAME));
-            ((TextView) navHeader.findViewById(R.id.textEmailId)).setText(common.getSession(ApiParams.USER_EMAIL));
+
         }
         super.onResume();
     }
@@ -166,27 +164,20 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         int id = item.getItemId();
 
         if (id == R.id.nav_profile) {
-            Intent intent = new Intent(MainActivity.this, UpdateProfileActivity.class);
-            startActivity(intent);
 
         } else if (id == R.id.nav_password) {
-            Intent intent = new Intent(MainActivity.this, ChangePasswordActivity.class);
-            startActivity(intent);
 
         } else if (id == R.id.nav_novo_usuario) {
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_info_historica) {
             Intent intent = new Intent(MainActivity.this,   CadastroActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_appointment) {
-            Intent intent = new Intent(MainActivity.this, MyAppointmentsActivity.class);
-            //Intent intent = new Intent(MainActivity.this,TimeSlotActivity.class);
-            startActivity(intent);
 
         } else if (id == R.id.nav_logout) {
-            common.logOut();
+
         } else if (id == R.id.nav_login) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -207,7 +198,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             // to handle the case where the user grants the permission. See the documentation
             // for ActivityCompat#requestPermissions for more details.
 
-            common.setToastMessage("Conceda as permissões de localização");
+            //common.setToastMessage("Conceda as permissões de localização");
             return;
         }
         map.setMyLocationEnabled(true);

@@ -3,10 +3,6 @@ package util;
 import android.view.MotionEvent;
 import android.view.View;
 
-/**
- * Created by subhashsanghani on 3/8/17.
- */
-
 public class SwipeDetector implements View.OnTouchListener {
 
     public static enum Action {

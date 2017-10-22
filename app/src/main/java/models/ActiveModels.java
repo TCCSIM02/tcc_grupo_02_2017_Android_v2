@@ -2,9 +2,6 @@ package models;
 
 import java.util.ArrayList;
 
-/**
- * Created by subhashsanghani on 5/22/17.
- */
 
 public class ActiveModels {
     public static BusinessModel BUSINESS_MODEL;

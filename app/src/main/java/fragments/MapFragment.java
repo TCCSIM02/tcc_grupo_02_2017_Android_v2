@@ -17,11 +17,10 @@ import java.util.ArrayList;
 
 import models.ActiveModels;
 import models.BusinessModel;
-import util.CommonClass;
 import util.GPSTracker;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
-    CommonClass common;
+    //CommonClass common;
     ArrayList<BusinessModel> postItems;
     String PREF_BUSINESS = "pref_business";
     GPSTracker gpsTracker;
@@ -35,7 +34,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
         act = getActivity();
 
-        common = new CommonClass(act);
+        //common = new CommonClass(act);
 
 
         gpsTracker = new GPSTracker(act);

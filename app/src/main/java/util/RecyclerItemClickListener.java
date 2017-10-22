@@ -1,8 +1,5 @@
 package util;
 
-/**
- * Created by subhashsanghani on 6/1/17.
- */
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.view.GestureDetector;

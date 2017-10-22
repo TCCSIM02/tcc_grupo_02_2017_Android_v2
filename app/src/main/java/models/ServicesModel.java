@@ -2,9 +2,6 @@ package models;
 
 import java.util.Locale;
 
-/**
- * Created by subhashsanghani on 5/22/17.
- */
 
 public class ServicesModel {
     public boolean isclicked=false;

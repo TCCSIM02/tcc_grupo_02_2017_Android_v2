@@ -12,10 +12,6 @@ import com.doctappo.MainActivity;
 import com.doctappo.R;
 
 
-/**
- * Created by subhashsanghani on 5/8/17.
- */
-
 public class NotifyService extends Service {
     @Nullable
     @Override

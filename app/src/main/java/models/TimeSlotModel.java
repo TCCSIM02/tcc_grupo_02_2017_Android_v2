@@ -2,10 +2,6 @@ package models;
 
 import java.util.ArrayList;
 
-/**
- * Created by subhashsanghani on 5/24/17.
- */
-
 public class TimeSlotModel {
     private ArrayList<SlotsModel> morning;
     private ArrayList<SlotsModel> afternoon;

@@ -1,8 +1,5 @@
 package models;
 
-/**
- * Created by subhashsanghani on 5/22/17.
- */
 
 public class BusinessModel {
     private String bus_id;
