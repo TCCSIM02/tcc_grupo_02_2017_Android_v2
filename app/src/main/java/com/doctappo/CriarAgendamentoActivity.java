@@ -24,6 +24,7 @@ public class CriarAgendamentoActivity extends CommonActivity {
     DatePickerDialog datePickerDialog;
     TextView txtUnidade;
     Spinner spinnerEspecialidade, spinnerMedico, spinnerHorario;
+    int codUnidade;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,7 +33,7 @@ public class CriarAgendamentoActivity extends CommonActivity {
         allowBack();
         setHeaderTitle("Agende");
 
-        //final int codUnidade = Integer.parseInt(this.getIntent().getStringExtra("codUnidade"));
+        codUnidade = Integer.parseInt(this.getIntent().getStringExtra("codUnidade"));
         txtUnidade = (TextView)  findViewById(R.id.txtUnidade);
 
         txtUnidade.setText(this.getIntent().getStringExtra("nomeFantasiaUnidade"));
@@ -182,8 +183,10 @@ public class CriarAgendamentoActivity extends CommonActivity {
         ModelEspecialidade modelEspecialidade = new ModelEspecialidade();
 
         int tamanho = 0;
+
+        //codUnidade;
         try {
-            tamanho = modelEspecialidade.listarEspecialidadesString().length;
+            tamanho = modelEspecialidade.listarEspecialidadesString(codUnidade).length;
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
@@ -191,10 +194,9 @@ public class CriarAgendamentoActivity extends CommonActivity {
         String[] vetorEspecialidade = new String[tamanho+1];
         vetorEspecialidade[0] = "Especialidade:";
         try {
-            String[] vetorModel = modelEspecialidade.listarEspecialidadesString();
+            String[] vetorModel = modelEspecialidade.listarEspecialidadesString(codUnidade);
 
             for(int i = 1 ; i < vetorEspecialidade.length  ; i++){
-                Log.e("ERRRROOO","Especialidade: " + vetorModel[i-1] + "Index: " + i);
                 vetorEspecialidade[i] = vetorModel[i-1];
             }
 

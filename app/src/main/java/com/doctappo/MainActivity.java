@@ -274,7 +274,8 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
                     TOUnidade unidade = (TOUnidade) marker.getTag();
 
-                    intent.putExtra("codUnidade",unidade.getCodUnidade());
+                    Log.e("ERRO CHAMADA AGEND", "Unidade: " + unidade.getCodUnidade());
+                    intent.putExtra("codUnidade",String.valueOf(unidade.getCodUnidade()));
                     intent.putExtra("nomeFantasiaUnidade", unidade.getNomeFantasia());
                     startActivity(intent);
 

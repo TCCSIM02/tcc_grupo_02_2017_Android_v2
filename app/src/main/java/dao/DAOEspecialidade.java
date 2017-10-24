@@ -94,6 +94,39 @@ public class DAOEspecialidade {
         return lista;
     }
 
+    public ArrayList<TOEspecialidade> listarEspecialidadesUnidade(int codUnidade){
+        TOEspecialidade toEspecialidade;
+        ArrayList<TOEspecialidade> lista = new ArrayList<>();
+        String sqlSelect = "select  " +
+                "distinct esp.especialidade " +
+                "from " +
+                "tcc.especialidade esp " +
+                "inner join tcc.associativamedicoespecialidade ass on esp.codEspecialidade = ass.codEspecialidade " +
+                "inner join tcc.medico med on ass.codMedico = med.codMedico and med.codUnidade = ? ";
+        // usando o try with resources do Java 7, que fecha o que abriu
+        try (Connection conn = FabricaConexao.getConexao();
+             PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
+            stm.setInt(1, codUnidade);
+            try (ResultSet rs = stm.executeQuery();) {
+                while(rs.next()) {
+                    toEspecialidade = new TOEspecialidade();
+
+                    //toEspecialidade.setCodEspecialidade(rs.getInt("codEspecialidade"));
+                    toEspecialidade.setEspecialidade(rs.getString("especialidade"));
+                    /*toEspecialidade.setFlagAtivo(rs.getString("flagAtivo"));
+                    toEspecialidade.setDescricao(rs.getString("descricao"));*/
+
+                    lista.add(toEspecialidade);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        } catch (SQLException e1) {
+            System.out.print(e1.getStackTrace());
+        }
+        return lista;
+    }
+
     public ArrayList<TOEspecialidade> listarEspecialidades(String chave){
         TOEspecialidade toEspecialidade;
         ArrayList<TOEspecialidade> lista = new ArrayList<>();

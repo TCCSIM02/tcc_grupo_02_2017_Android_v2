@@ -142,7 +142,7 @@ public class DAOUnidade {
     public ArrayList<TOUnidade> listarUnidades(){
         TOUnidade toUnidade;
         ArrayList<TOUnidade> lista = new ArrayList<>();
-        String sqlSelect = "SELECT * FROM tcc.unidade order by codUnidade desc";
+        String sqlSelect = "SELECT * FROM tcc.unidade";
         // usando o try with resources do Java 7, que fecha o que abriu
         try (Connection conn = FabricaConexao.getConexao();
              PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
