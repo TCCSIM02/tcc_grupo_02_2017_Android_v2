@@ -4,6 +4,8 @@ package models;
  * Created by Nilton on 07/10/2017.
  */
 
+import android.util.Log;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -51,6 +53,12 @@ public class ModelLogin {
         this.nomeLogin = nomeLogin;
         this.senha = senha;
         this.email = email;
+    }
+
+    public ModelLogin(String nomeLogin, String senha) {
+        super();
+        this.nomeLogin = nomeLogin;
+        this.senha = senha;
     }
 
     /**
@@ -163,8 +171,6 @@ public class ModelLogin {
 
         String senhaCriptografada = hexString.toString();
 
-        System.out.print(senhaCriptografada);
-
         return senhaCriptografada;
     }
 
@@ -174,6 +180,27 @@ public class ModelLogin {
         TOLogin toLogin = getTO();
         dao.cadastrarLogin(toLogin);
         this.codLogin = toLogin.getCodLogin();
+
+    }
+
+    public boolean logar() throws NoSuchAlgorithmException, UnsupportedEncodingException{
+
+        DAOLogin dao = new DAOLogin();
+        TOLogin toLogin = getTO();
+        boolean logado = false;
+
+        TOLogin toLoginBD = dao.buscarLogin(toLogin.getNomeLogin());
+
+        Log.e("Login:",toLogin.getNomeLogin());
+        Log.e("Login:",toLogin.getSenhaCriptografada());
+        Log.e("Login:",toLoginBD.getSenhaCriptografada()+"");
+
+        String senhaBd = toLoginBD.getSenhaCriptografada().toUpperCase() + "";
+
+        if (toLogin.getSenhaCriptografada().toUpperCase().equals(senhaBd))
+                logado = true;
+
+        return logado;
 
     }
 

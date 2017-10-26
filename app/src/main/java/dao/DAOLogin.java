@@ -4,6 +4,8 @@ package dao;
  * Created by Nilton on 07/10/2017.
  */
 
+import android.util.Log;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,6 +75,35 @@ public class DAOLogin {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public TOLogin buscarLogin(String pNomeLogin){
+        TOLogin TOLogin = new TOLogin();
+        Log.e("Login:","CHEGAMOS AQUI 4,5");
+        String sqlSelect = "SELECT codLogin, nomeLogin, senha, flagAtivo, dataCadastro FROM tcc.login where nomeLogin = ?";
+        // usando o try with resources do Java 7, que fecha o que abriu
+        try (Connection conn = FabricaConexao.getConexao();
+             PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
+            stm.setString(1, pNomeLogin);
+            try (ResultSet rs = stm.executeQuery();) {
+                if (rs.next()) {
+                    Log.e("Login:","CHEGAMOS AQUI 5");
+                    TOLogin.setCodLogin(rs.getInt("codLogin"));
+                    TOLogin.setNomeLogin(rs.getString("nomeLogin"));
+                    TOLogin.setSenhaCriptografada(rs.getString("senha"));
+                    TOLogin.setFlagAtivo(rs.getString("flagAtivo"));
+                    TOLogin.setDataCadastro(rs.getDate("dataCadastro"));
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Log.e("Login:","CHEGAMOS AQUI 6");
+            }
+        } catch (SQLException e1) {
+            System.out.print(e1.getStackTrace());
+            Log.e("Login:","CHEGAMOS AQUI 7");
+        }
+        Log.e("Login:","CHEGAMOS AQUI 8");
+        return TOLogin;
     }
 }
 
