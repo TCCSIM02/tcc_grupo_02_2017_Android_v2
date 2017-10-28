@@ -23,6 +23,7 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -41,6 +42,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
     ArrayList<CategoryModel> categoryArray;
     Toolbar toolbar;
+    boolean logado = false;
 
     protected Context context;
 
@@ -63,12 +65,13 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
+
+        isLogged();
 
         com.google.android.gms.maps.MapFragment mapFragment = (com.google.android.gms.maps.MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
@@ -93,8 +96,6 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder()
                 .permitAll().build();
         StrictMode.setThreadPolicy(policy);
-
-
     }
 
     @Override
@@ -103,9 +104,11 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         View navHeader = navigationView.getHeaderView(0);
         //((TextView) navHeader.findViewById(R.id.menu_title)).setTypeface(common.getCustomFont());
 
+        isLogged();
+
         navigationView.setNavigationItemSelectedListener(this);
         Menu nav_Menu = navigationView.getMenu();
-        if (1 == 1) {
+        if (!logado) {
             nav_Menu.findItem(R.id.nav_novo_usuario).setVisible(true);
             nav_Menu.findItem(R.id.nav_appointment).setVisible(false);
             nav_Menu.findItem(R.id.nav_logout).setVisible(false);
@@ -287,6 +290,19 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
     public void onCoracaoIconClick(){
         Intent intent = new Intent(MainActivity.this, SplashActivity.class);
         startActivity(intent);
+    }
+
+    public void isLogged(){
+        try{
+            logado = Boolean.parseBoolean(this.getIntent().getStringExtra("logado"));
+            Log.e("Logado: ", this.getIntent().getStringExtra("logado"));
+            Toast.makeText(this, "LOGOU NA Tela MAIN: " + logado,
+                    Toast.LENGTH_LONG).show();
+        }catch(Exception e){
+            Toast.makeText(this, "NÃO LOGOU NA Tela MAIN: " + logado,
+                    Toast.LENGTH_LONG).show();
+            Log.e("Logado: ", "Não");
+        }
     }
 }
 

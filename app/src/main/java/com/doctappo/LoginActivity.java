@@ -72,6 +72,11 @@ public class LoginActivity extends CommonActivity {
                             Toast.LENGTH_LONG).show();
 
                     Log.e("Login:","LOGADO");
+
+                    Intent intent = new Intent(LoginActivity.this,MainActivity.class);
+                    intent.putExtra("logado","true");
+                    startActivity(intent);
+
                 }else{
                     Toast.makeText(this, "DEU PAU",
                             Toast.LENGTH_LONG).show();
