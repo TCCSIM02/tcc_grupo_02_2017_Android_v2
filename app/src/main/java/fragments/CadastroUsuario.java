@@ -1,14 +1,18 @@
 package fragments;
 
-import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 import com.doctappo.R;
+
+import models.ModelLogin;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +32,8 @@ public class CadastroUsuario extends Fragment {
     private String mParam1;
     private String mParam2;
 
-
+    EditText edtNomeUsuario, edtSenha, edtConfirmaSenha;
+    Button btnCriarPaciente;
     public CadastroUsuario() {
         // Required empty public constructor
     }
@@ -46,7 +51,57 @@ public class CadastroUsuario extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_cadastro_usuario, container, false);
+        View view4 = inflater.inflate(R.layout.fragment_cadastro_usuario, container, false);
+
+        edtNomeUsuario = (EditText) view4.findViewById(R.id.txtNomeUsuario);
+        edtSenha = (EditText) view4.findViewById(R.id.txtSenha);
+        edtConfirmaSenha = (EditText) view4.findViewById(R.id.txtConfirmaSenha);
+
+        btnCriarPaciente = (Button) view4.findViewById(R.id.btnCriarPaciente);
+
+        btnCriarPaciente.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Log.e("Login:","CHEGAMOS AQUI 7");
+                cadastrar();
+            }
+        });
+        return view4;
+    }
+
+    public void cadastrar(){
+
+        if(!edtSenha.getText().toString().equals(edtConfirmaSenha.getText().toString())){
+            Toast.makeText(getActivity().getBaseContext(), "A senha e confirmação de senha precisam ser iguais", Toast.LENGTH_LONG).show();
+            Log.e("Login:","CHEGAMOS AQUI 8");
+        }else if(buscaUsuarioExistente()){
+            Log.e("Login:","CHEGAMOS AQUI 9");
+            Toast.makeText(getActivity().getBaseContext(), "Este nome de usuário já está cadastrado em nosso banco de dados, por favor, escolher um novo", Toast.LENGTH_LONG).show();
+        }else{
+            Log.e("Login:","CHEGAMOS AQUI 9.5");
+        }
+
+    }
+
+    public boolean buscaUsuarioExistente(){
+
+        ModelLogin modelLogin = new ModelLogin();
+        boolean existeUsuario = true;
+
+        try {
+            Log.e("Login:","CHEGAMOS AQUI 9.1");
+            if(modelLogin.listarLogin(edtNomeUsuario.getText().toString()).size() > 0){
+                Log.e("Login:","CHEGAMOS AQUI 9.2");
+            }else{
+                Log.e("Login:","CHEGAMOS AQUI 9.3");
+                existeUsuario = false;
+            }
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+            Log.e("Login:","CHEGAMOS AQUI 9.4");
+        }
+        Log.e("Login:","CHEGAMOS AQUI 9.41 " + existeUsuario);
+        return existeUsuario;
     }
 
 }

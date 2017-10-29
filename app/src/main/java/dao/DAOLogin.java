@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 import connectionFactory.FabricaConexao;
 import to.TOLogin;
@@ -105,5 +106,36 @@ public class DAOLogin {
         Log.e("Login:","CHEGAMOS AQUI 8");
         return TOLogin;
     }
+
+    public ArrayList<TOLogin> listarLogins(String chave){
+        TOLogin toLogin;
+        ArrayList<TOLogin> lista = new ArrayList<>();
+        String sqlSelect = "select  codLogin, nomeLogin, senha, flagAtivo, dataCadastro from tcc.login where nomelogin = ? limit 1";
+        // usando o try with resources do Java 7, que fecha o que abriu
+        try (Connection conn = FabricaConexao.getConexao();
+             PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
+            stm.setString(1, chave);
+            try (ResultSet rs = stm.executeQuery();) {
+                while(rs.next()) {
+                    toLogin = new TOLogin();
+                    Log.e("Login:","CHEGAMOS AQUI 10");
+                    toLogin.setCodLogin(rs.getInt("codLogin"));
+                    toLogin.setNomeLogin(rs.getString("nomeLogin"));
+                    toLogin.setSenhaCriptografada(rs.getString("senha"));
+                    toLogin.setFlagAtivo(rs.getString("flagAtivo"));
+                    toLogin.setDataCadastro(rs.getDate("dataCadastro"));
+
+                    lista.add(toLogin);
+                }
+            } catch (SQLException e) {
+                e.printStackTrace();
+                Log.e("Login:","CHEGAMOS AQUI 11");
+            }
+        } catch (SQLException e1) {
+            System.out.print(e1.getStackTrace());
+        }
+        return lista;
+    }
+
 }
 

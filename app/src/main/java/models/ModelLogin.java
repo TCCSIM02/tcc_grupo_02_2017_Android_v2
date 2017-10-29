@@ -9,6 +9,7 @@ import android.util.Log;
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.Date;
 
 import dao.DAOLogin;
@@ -191,10 +192,6 @@ public class ModelLogin {
 
         TOLogin toLoginBD = dao.buscarLogin(toLogin.getNomeLogin());
 
-        Log.e("Login:",toLogin.getNomeLogin());
-        Log.e("Login:",toLogin.getSenhaCriptografada());
-        Log.e("Login:",toLoginBD.getSenhaCriptografada()+"");
-
         String senhaBd = toLoginBD.getSenhaCriptografada().toUpperCase() + "";
 
         if (toLogin.getSenhaCriptografada().toUpperCase().equals(senhaBd))
@@ -211,6 +208,15 @@ public class ModelLogin {
 
         return dao.getUltimoCodLogin(toLogin);
 
+    }
+    public ArrayList<TOLogin> listarLogin(String chave) throws ClassNotFoundException{
+        ArrayList<TOLogin> lista;
+        Log.e("Login:","CHEGAMOS AQUI 9.11");
+        DAOLogin dao = new DAOLogin();
+        Log.e("Login:","CHEGAMOS AQUI 9.12");
+        lista = dao.listarLogins(chave);
+        Log.e("Login:","CHEGAMOS AQUI 9.13");
+        return lista;
     }
 
 }
