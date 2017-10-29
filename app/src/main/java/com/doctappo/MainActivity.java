@@ -179,7 +179,8 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             startActivity(intent);
 
         } else if (id == R.id.nav_appointment) {
-
+            Intent intent = new Intent(MainActivity.this,MeusAgendamentosActivity.class);
+            startActivity(intent);
         } else if (id == R.id.nav_logout) {
 
         } else if (id == R.id.nav_login) {

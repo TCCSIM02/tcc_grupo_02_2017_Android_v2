@@ -194,8 +194,10 @@ public class ModelLogin {
 
         String senhaBd = "";
 
-        if(!toLoginBD.getSenhaCriptografada().equals(null)){
+        try {
             senhaBd = toLoginBD.getSenhaCriptografada().toUpperCase();
+        }catch (Exception e){
+
         }
 
         if (toLogin.getSenhaCriptografada().toUpperCase().equals(senhaBd))

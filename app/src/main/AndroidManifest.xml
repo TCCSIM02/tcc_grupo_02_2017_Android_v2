@@ -51,7 +51,8 @@
             android:name=".CriarAgendamentoActivity"
             android:configChanges="orientation|screenSize" />
         <activity android:name=".ConfirmarAgendamentoActivity" />
-        <activity android:name=".CadastroInfoHistoricaActivity"></activity>
+        <activity android:name=".CadastroInfoHistoricaActivity" />
+        <activity android:name=".MeusAgendamentosActivity"></activity>
     </application>
 
 </manifest>
