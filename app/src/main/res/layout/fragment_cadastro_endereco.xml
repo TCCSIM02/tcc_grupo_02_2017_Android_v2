@@ -84,16 +84,7 @@
                     android:hint="Número:"
                     android:inputType="number" />
             </android.support.design.widget.TextInputLayout>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Próximo passo"
-                android:id="@+id/btnProximo"
-                android:scaleType="center"
-                android:layout_marginTop="@dimen/activity_horizontal_margin"
-                android:textColor="@color/colorTextWhite"
-                android:background="@drawable/xml_button"/>vil"
-                    android:l
+
         </LinearLayout>
     </ScrollView>
 
