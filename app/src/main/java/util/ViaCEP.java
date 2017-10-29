@@ -54,6 +54,7 @@ public class ViaCEP {
      * @throws util.ViaCEPException caso ocorra algum erro
      */
     public ViaCEP(String cep) throws ViaCEPException, JSONException {
+        cep = cep.replace("-","").replace(" ","");
         this.buscar(cep);
     }
 
