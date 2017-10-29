@@ -14,16 +14,89 @@ public class ModelPaciente extends ModelUsuario {
 
     private int codPaciente;
     public int codLoginCadastrado;
-    private String numConvenio;
+    private String numConvenio, alergiaMedicamento, alergiaAlimentares, medicamentoContinuo, cirurgia, antecedentesPessoais, tipoSanguineo;;
+    private Double peso, altura;
 
     public ModelPaciente() {
         // TODO Auto-generated constructor stub
+    }
+
+    public String getAlergiaMedicamento() {
+        return alergiaMedicamento;
+    }
+
+    public void setAlergiaMedicamento(String alergiaMedicamento) {
+        this.alergiaMedicamento = alergiaMedicamento;
+    }
+
+    public String getAlergiaAlimentares() {
+        return alergiaAlimentares;
+    }
+
+    public void setAlergiaAlimentares(String alergiaAlimentares) {
+        this.alergiaAlimentares = alergiaAlimentares;
+    }
+
+    public String getMedicamentoContinuo() {
+        return medicamentoContinuo;
+    }
+
+    public void setMedicamentoContinuo(String medicamentoContinuo) {
+        this.medicamentoContinuo = medicamentoContinuo;
+    }
+
+    public String getCirurgia() {
+        return cirurgia;
+    }
+
+    public void setCirurgia(String cirurgia) {
+        this.cirurgia = cirurgia;
+    }
+
+    public String getAntecedentesPessoais() {
+        return antecedentesPessoais;
+    }
+
+    public void setAntecedentesPessoais(String antecedentesPessoais) {
+        this.antecedentesPessoais = antecedentesPessoais;
+    }
+
+    public String getTipoSanguineo() {
+        return tipoSanguineo;
+    }
+
+    public void setTipoSanguineo(String tipoSanguineo) {
+        this.tipoSanguineo = tipoSanguineo;
+    }
+
+    public Double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
+
+    public Double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(Double altura) {
+        this.altura = altura;
     }
 
     public ModelPaciente(int codPaciente, String numConvenio) {
         super();
         this.codPaciente = codPaciente;
         this.numConvenio = numConvenio;
+    }
+
+    public int getCodLoginCadastrado() {
+        return codLoginCadastrado;
+    }
+
+    public void setCodLoginCadastrado(int codLoginCadastrado) {
+        this.codLoginCadastrado = codLoginCadastrado;
     }
 
     public ModelPaciente(String numeroEndereco, Date dataCadastro, String nome,
@@ -34,6 +107,7 @@ public class ModelPaciente extends ModelUsuario {
         super(numeroEndereco, dataCadastro, nome, cpf, dataNascimento,
                 estadoCivil, email, nacionalidade, endereco, cep, cidade, uf, pais,
                 tel1, tel2, cel, flagAtivo);
+
         this.codPaciente = codPaciente;
         this.numConvenio = numConvenio;
     }

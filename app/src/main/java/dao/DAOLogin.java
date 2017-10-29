@@ -56,7 +56,7 @@ public class DAOLogin {
             //java.sql.Date dataSql = new java.sql.Date(longDate);
 
 
-            stm.setInt(1,1);
+            stm.setInt(1,2);
             stm.setString(2,toLogin.getNomeLogin());
             stm.setString(3,toLogin.getSenhaCriptografada());
             //stm.setString(4,toLogin.getTipoLogin());
@@ -81,7 +81,7 @@ public class DAOLogin {
     public TOLogin buscarLogin(String pNomeLogin){
         TOLogin TOLogin = new TOLogin();
         Log.e("Login:","CHEGAMOS AQUI 4,5");
-        String sqlSelect = "SELECT codLogin, nomeLogin, senha, flagAtivo, dataCadastro FROM tcc.login where nomeLogin = ?";
+        String sqlSelect = "SELECT codLogin, nomeLogin, senha, flagAtivo, dataCadastro FROM tcc.login where nomeLogin = ? and codNivel = 2";
         // usando o try with resources do Java 7, que fecha o que abriu
         try (Connection conn = FabricaConexao.getConexao();
              PreparedStatement stm = conn.prepareStatement(sqlSelect);) {

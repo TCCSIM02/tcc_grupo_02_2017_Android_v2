@@ -16,6 +16,7 @@ import android.widget.TextView;
 
 public abstract class CommonActivity extends AppCompatActivity {
     //public CommonClass common;
+    boolean logado = false;
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //common = new CommonClass(this);
@@ -64,5 +65,17 @@ public abstract class CommonActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
+    public void isLogged(){
+        try{
+            logado = Boolean.parseBoolean(this.getIntent().getStringExtra("logado"));
+            /*Log.e("Logado: ", this.getIntent().getStringExtra("logado"));
+            Toast.makeText(this, "LOGOU NA Tela MAIN: " + logado,
+                    Toast.LENGTH_LONG).show();*/
+        }catch(Exception e){
+            /*Toast.makeText(this, "NÃO LOGOU NA Tela MAIN: " + logado,
+                    Toast.LENGTH_LONG).show();
+            Log.e("Logado: ", "Não");*/
+        }
+    }
 
 }

@@ -7,13 +7,79 @@ package to;
 public class TOPaciente extends TOUsuario {
 
     private int codPaciente;
-    private String numConvenio;
+    private String numConvenio, alergiaMedicamento, alergiaAlimentares, medicamentoContinuo, cirurgia, antecedentesPessoais, tipoSanguineo;;
+    private Double peso, altura;
     /**
      * @return the codPaciente
      */
     public int getCodPaciente() {
         return codPaciente;
     }
+
+    public String getAlergiaMedicamento() {
+        return alergiaMedicamento;
+    }
+
+    public void setAlergiaMedicamento(String alergiaMedicamento) {
+        this.alergiaMedicamento = alergiaMedicamento;
+    }
+
+    public String getAlergiaAlimentares() {
+        return alergiaAlimentares;
+    }
+
+    public void setAlergiaAlimentares(String alergiaAlimentares) {
+        this.alergiaAlimentares = alergiaAlimentares;
+    }
+
+    public String getMedicamentoContinuo() {
+        return medicamentoContinuo;
+    }
+
+    public void setMedicamentoContinuo(String medicamentoContinuo) {
+        this.medicamentoContinuo = medicamentoContinuo;
+    }
+
+    public String getCirurgia() {
+        return cirurgia;
+    }
+
+    public void setCirurgia(String cirurgia) {
+        this.cirurgia = cirurgia;
+    }
+
+    public String getAntecedentesPessoais() {
+        return antecedentesPessoais;
+    }
+
+    public void setAntecedentesPessoais(String antecedentesPessoais) {
+        this.antecedentesPessoais = antecedentesPessoais;
+    }
+
+    public String getTipoSanguineo() {
+        return tipoSanguineo;
+    }
+
+    public void setTipoSanguineo(String tipoSanguineo) {
+        this.tipoSanguineo = tipoSanguineo;
+    }
+
+    public Double getPeso() {
+        return peso;
+    }
+
+    public void setPeso(Double peso) {
+        this.peso = peso;
+    }
+
+    public Double getAltura() {
+        return altura;
+    }
+
+    public void setAltura(Double altura) {
+        this.altura = altura;
+    }
+
     /**
      * @return the numConvenio
      */

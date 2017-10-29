@@ -192,7 +192,11 @@ public class ModelLogin {
 
         TOLogin toLoginBD = dao.buscarLogin(toLogin.getNomeLogin());
 
-        String senhaBd = toLoginBD.getSenhaCriptografada().toUpperCase() + "";
+        String senhaBd = "";
+
+        if(!toLoginBD.getSenhaCriptografada().equals(null)){
+            senhaBd = toLoginBD.getSenhaCriptografada().toUpperCase();
+        }
 
         if (toLogin.getSenhaCriptografada().toUpperCase().equals(senhaBd))
                 logado = true;

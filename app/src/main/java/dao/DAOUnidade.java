@@ -85,7 +85,7 @@ public class DAOUnidade {
     }
 
     public void excluirUnidade(TOUnidade toUnidade){
-        String sqlDelete = "DELETE FROM tcc.unidade WHERE codUnidade =?";
+        String sqlDelete = "DELETE FROM tcc.unidade WHERE codUnidade =? and flagAtivo = 1";
         // usando o try with resources do Java 7, que fecha o que abriu
         try (Connection conn = FabricaConexao.getConexao();
              PreparedStatement stm = conn.prepareStatement(sqlDelete);) {
@@ -101,7 +101,7 @@ public class DAOUnidade {
     public TOUnidade consultarUnidadeCod(int codUnidadeBusca){
         TOUnidade toUnidade = new TOUnidade();
         toUnidade.setCodUnidade(codUnidadeBusca);
-        String sqlSelect = "SELECT * FROM tcc.unidade where codUnidade = ?";
+        String sqlSelect = "SELECT * FROM tcc.unidade where codUnidade = ?  and flagAtivo = 1";
         // usando o try with resources do Java 7, que fecha o que abriu
         try (Connection conn = FabricaConexao.getConexao();
              PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
@@ -184,7 +184,7 @@ public class DAOUnidade {
     public ArrayList<TOUnidade> listarUnidades(String chave){
         TOUnidade toUnidade;
         ArrayList<TOUnidade> lista = new ArrayList<>();
-        String sqlSelect = "SELECT * from  tcc.unidade where upper(nomeFantasia) like '?'";
+        String sqlSelect = "SELECT * from  tcc.unidade where upper(nomeFantasia) like '?' and flagAtivo = 1";
         // usando o try with resources do Java 7, que fecha o que abriu
         try (Connection conn = FabricaConexao.getConexao();
              PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
@@ -240,7 +240,7 @@ public class DAOUnidade {
                 ", tel2" +
                 ", cel " +
                 " from tcc.unidade " +
-                " where flagAtivo = 1;";
+                " where flagAtivo = 1";
         // usando o try with resources do Java 7, que fecha o que abriu
         try (Connection conn = FabricaConexao.getConexao();
              PreparedStatement stm = conn.prepareStatement(sqlSelect);) {

@@ -23,7 +23,6 @@ import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
@@ -114,10 +113,12 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             nav_Menu.findItem(R.id.nav_logout).setVisible(false);
             nav_Menu.findItem(R.id.nav_password).setVisible(false);
             nav_Menu.findItem(R.id.nav_profile).setVisible(false);
+            nav_Menu.findItem(R.id.nav_info_historica).setVisible(false);
             nav_Menu.findItem(R.id.nav_login).setVisible(true);
             navHeader.findViewById(R.id.txtFullName).setVisibility(View.GONE);
             navHeader.findViewById(R.id.textEmailId).setVisibility(View.GONE);
         } else {
+            nav_Menu.findItem(R.id.nav_novo_usuario).setVisible(false);
             nav_Menu.findItem(R.id.nav_appointment).setVisible(true);
             nav_Menu.findItem(R.id.nav_logout).setVisible(true);
             nav_Menu.findItem(R.id.nav_password).setVisible(true);
@@ -174,7 +175,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             Intent intent = new Intent(MainActivity.this, CadastroActivity.class);
             startActivity(intent);
         } else if (id == R.id.nav_info_historica) {
-            Intent intent = new Intent(MainActivity.this,   CadastroActivity.class);
+            Intent intent = new Intent(MainActivity.this,CadastroInfoHistoricaActivity.class);
             startActivity(intent);
 
         } else if (id == R.id.nav_appointment) {
@@ -263,27 +264,30 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
                     info.addView(title);
                     info.addView(snippet);
 
-                    if(!marker.getTitle().equals("Sua posição")) {
-                        info.addView(btnUnidade);
+                    if (logado) {
+                        if (!marker.getTitle().equals("Sua posição")) {
+                            info.addView(btnUnidade);
+                        }
                     }
                     return info;
                 }
             });
 
-            map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
-                public void onInfoWindowClick(Marker marker)
-                {
-                    Intent intent = new Intent(MainActivity.this, CriarAgendamentoActivity.class);
+            if (logado) {
+                map.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+                    public void onInfoWindowClick(Marker marker) {
+                        Intent intent = new Intent(MainActivity.this, CriarAgendamentoActivity.class);
 
-                    TOUnidade unidade = (TOUnidade) marker.getTag();
+                        TOUnidade unidade = (TOUnidade) marker.getTag();
 
-                    Log.e("ERRO CHAMADA AGEND", "Unidade: " + unidade.getCodUnidade());
-                    intent.putExtra("codUnidade",String.valueOf(unidade.getCodUnidade()));
-                    intent.putExtra("nomeFantasiaUnidade", unidade.getNomeFantasia());
-                    startActivity(intent);
+                        Log.e("ERRO CHAMADA AGEND", "Unidade: " + unidade.getCodUnidade());
+                        intent.putExtra("codUnidade", String.valueOf(unidade.getCodUnidade()));
+                        intent.putExtra("nomeFantasiaUnidade", unidade.getNomeFantasia());
+                        startActivity(intent);
 
-                }
-            });
+                    }
+                });
+            }
         }
     }
 
@@ -295,13 +299,13 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
     public void isLogged(){
         try{
             logado = Boolean.parseBoolean(this.getIntent().getStringExtra("logado"));
-            Log.e("Logado: ", this.getIntent().getStringExtra("logado"));
+            /*Log.e("Logado: ", this.getIntent().getStringExtra("logado"));
             Toast.makeText(this, "LOGOU NA Tela MAIN: " + logado,
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_LONG).show();*/
         }catch(Exception e){
-            Toast.makeText(this, "NÃO LOGOU NA Tela MAIN: " + logado,
+            /*Toast.makeText(this, "NÃO LOGOU NA Tela MAIN: " + logado,
                     Toast.LENGTH_LONG).show();
-            Log.e("Logado: ", "Não");
+            Log.e("Logado: ", "Não");*/
         }
     }
 }

@@ -35,31 +35,4 @@
         </menu>
     </item>
 
-    <item android:title="@string/minha_saude">
-        <menu>
-            <item
-                android:id="@+id/nav_vacina"
-                android:icon="@drawable/ic_menu_password"
-                android:title="@string/vacinas" />
-            <item
-                android:id="@+id/nav_doacao"
-                android:icon="@drawable/ic_menu_password"
-                android:title="@string/doacao_sangue" />
-        </menu>
-    </item>
-
-    <item android:title="@string/item_title">
-        <menu>
-            <item
-                android:id="@+id/nav_share"
-                android:icon="@drawable/ic_menu_share"
-                android:title="@string/nav_share" />
-            <item
-                android:id="@+id/nav_rating"
-                android:icon="@drawable/ic_menu_rating"
-                android:title="@string/nav_rating" />
-        </menu>
-
-    </item>
-
 </menu>

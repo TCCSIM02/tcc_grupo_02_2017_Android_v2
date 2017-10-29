@@ -310,4 +310,28 @@ public class DAOPaciente {
         }
         return lista;
     }
+
+    public void cadastrarPacienteInfoHist(TOPaciente toPaciente){
+        String sqlUpdate = "UPDATE tcc.paciente SET alergiaMedicamento = ?, alergiaAlimentares = ?, peso = ?, altura = ?, medicamentoContinuo = ?, cirurgia = ?, antecedentesPessoais = ?, tipoSanguineo = ? WHERE codPaciente = ?";
+        // usando o try with resources do Java 7, que fecha o que abriu
+        try (Connection conn = FabricaConexao.getConexao();
+             PreparedStatement stm = conn.prepareStatement(sqlUpdate);) {
+
+            stm.setString(1,toPaciente.getAlergiaMedicamento());
+            stm.setString(2,toPaciente.getAlergiaAlimentares());
+            stm.setDouble(3,toPaciente.getPeso());
+            stm.setDouble(4,toPaciente.getAltura());
+            stm.setString(5,toPaciente.getMedicamentoContinuo());
+            stm.setString(6,toPaciente.getCirurgia());
+            stm.setString(7,toPaciente.getAntecedentesPessoais());
+            stm.setString(8,toPaciente.getTipoSanguineo());
+            stm.setInt(9,toPaciente.getCodPaciente());
+
+            //System.out.println(toPaciente.getCodPaciente());
+
+            stm.execute();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
 }
