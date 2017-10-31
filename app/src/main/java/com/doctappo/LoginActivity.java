@@ -75,6 +75,8 @@ public class LoginActivity extends CommonActivity {
 
                     Intent intent = new Intent(LoginActivity.this,MainActivity.class);
                     intent.putExtra("logado","true");
+                    intent.putExtra("codLogin",String.valueOf(modelLogin.getCodLogin()));
+                    intent.putExtra("nomeLogin",String.valueOf(modelLogin.getNomeLogin()));
                     startActivity(intent);
 
                 }else{

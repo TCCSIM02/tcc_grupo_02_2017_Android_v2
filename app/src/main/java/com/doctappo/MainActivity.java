@@ -41,7 +41,6 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
     ArrayList<CategoryModel> categoryArray;
     Toolbar toolbar;
-    boolean logado = false;
 
     protected Context context;
 
@@ -70,7 +69,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(false);
 
-        isLogged();
+        super.isLogged();
 
         com.google.android.gms.maps.MapFragment mapFragment = (com.google.android.gms.maps.MapFragment) getFragmentManager()
                 .findFragmentById(R.id.map);
@@ -180,6 +179,7 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
         } else if (id == R.id.nav_appointment) {
             Intent intent = new Intent(MainActivity.this,MeusAgendamentosActivity.class);
+            intent.putExtra("codLogin",super.codLogin);
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
 
@@ -215,6 +215,8 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         ArrayList<TOUnidade> listaUnidade = null;
         try {
             listaUnidade = modelUnidade.listarUnidadesMap();
+
+
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
             Log.e("Lista Unidade" ,"Erro ao listar unidade");
@@ -297,17 +299,6 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         startActivity(intent);
     }
 
-    public void isLogged(){
-        try{
-            logado = Boolean.parseBoolean(this.getIntent().getStringExtra("logado"));
-            /*Log.e("Logado: ", this.getIntent().getStringExtra("logado"));
-            Toast.makeText(this, "LOGOU NA Tela MAIN: " + logado,
-                    Toast.LENGTH_LONG).show();*/
-        }catch(Exception e){
-            /*Toast.makeText(this, "NÃO LOGOU NA Tela MAIN: " + logado,
-                    Toast.LENGTH_LONG).show();
-            Log.e("Logado: ", "Não");*/
-        }
-    }
+
 }
 

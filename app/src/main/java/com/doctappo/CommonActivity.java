@@ -1,6 +1,7 @@
 package com.doctappo;
 
 import android.animation.ObjectAnimator;
+import android.annotation.SuppressLint;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -13,16 +14,21 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public abstract class CommonActivity extends AppCompatActivity {
     //public CommonClass common;
     boolean logado = false;
+    String nomeUsuario = "";
+    String codLogin = "";
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         //common = new CommonClass(this);
 
         super.onCreate(savedInstanceState);
     }
+    @SuppressLint("RestrictedApi")
     public void allowBack(){
         getSupportActionBar().setDefaultDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -68,6 +74,13 @@ public abstract class CommonActivity extends AppCompatActivity {
     public void isLogged(){
         try{
             logado = Boolean.parseBoolean(this.getIntent().getStringExtra("logado"));
+
+            Toast.makeText(this, this.getIntent().getStringExtra("nomeLogin") + " " +
+                            this.getIntent().getStringExtra("codLogin"),
+                    Toast.LENGTH_LONG).show();
+
+            codLogin = this.getIntent().getStringExtra("codLogin");
+
             /*Log.e("Logado: ", this.getIntent().getStringExtra("logado"));
             Toast.makeText(this, "LOGOU NA Tela MAIN: " + logado,
                     Toast.LENGTH_LONG).show();*/

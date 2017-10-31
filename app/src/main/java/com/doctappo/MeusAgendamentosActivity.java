@@ -15,7 +15,9 @@ public class MeusAgendamentosActivity extends CommonActivity {
 
         ListView listview = (ListView) findViewById(R.id.listview);
 
-        String[] dados = new String[] { "Cupcake", "Donut", "Eclair", "Froyo", "Gingerbread",
+        super.isLogged();
+
+        String[] dados = new String[] { "Cupcake\nNilton\n2", "Donut", "Eclair", "Froyo", "Gingerbread",
                 "Honeycomb", "Ice Cream Sandwich", "Jelly Bean",
                 "KitKat", "Lollipop", "Marshmallow", "Nougat" };
 

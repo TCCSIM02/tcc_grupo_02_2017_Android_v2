@@ -192,6 +192,9 @@ public class ModelLogin {
 
         TOLogin toLoginBD = dao.buscarLogin(toLogin.getNomeLogin());
 
+        setCodLogin(toLoginBD.getCodLogin());
+        setNomeLogin(toLoginBD.getNomeLogin());
+
         String senhaBd = "";
 
         try {
