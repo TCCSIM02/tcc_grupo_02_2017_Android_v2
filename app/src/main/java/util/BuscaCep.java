@@ -1,6 +1,5 @@
 package util;
 
-import org.json.simple.parser.ParseException;
 import org.jsoup.HttpStatusException;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -96,7 +95,7 @@ public class BuscaCep {
         return CEP;
     }
 
-    public String getLatLong(String CEP) throws IOException, ParseException {
+    public String getLatLong(String CEP) throws IOException {
 
         // ***************************************************
         try {
