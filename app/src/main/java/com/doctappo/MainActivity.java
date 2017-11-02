@@ -1,6 +1,8 @@
 package com.doctappo;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -43,6 +45,10 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
     Toolbar toolbar;
 
     protected Context context;
+
+    private AlertDialog alerta;
+
+
 
     /**
      * Request code for location permission request.
@@ -183,6 +189,8 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             startActivity(intent);
         } else if (id == R.id.nav_logout) {
 
+            logout();
+
         } else if (id == R.id.nav_login) {
             Intent intent = new Intent(MainActivity.this, LoginActivity.class);
             startActivity(intent);
@@ -299,6 +307,32 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         startActivity(intent);
     }
 
+    private void logout() {
+        //Cria o gerador do AlertDialog
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        //define o titulo
+        builder.setTitle("Logout");
+        //define a mensagem
+        builder.setMessage("Deseja realmente finalizar a sessão?");
+        //define um botão como positivo
+        builder.setPositiveButton("Sim", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
+                MainActivity.super.logado = false;
+                Intent intent = new Intent(MainActivity.this,MainActivity.class);
+                intent.putExtra("logado","false");
+                startActivity(intent);
+            }
+        });
+        //define um botão como negativo.
+        builder.setNegativeButton("Não", new DialogInterface.OnClickListener() {
+            public void onClick(DialogInterface arg0, int arg1) {
 
+            }
+        });
+        //cria o AlertDialog
+        alerta = builder.create();
+        //Exibe
+        alerta.show();
+    }
 }
 
