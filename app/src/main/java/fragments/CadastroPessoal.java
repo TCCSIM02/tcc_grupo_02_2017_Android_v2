@@ -41,6 +41,7 @@ public class CadastroPessoal extends Fragment {
     private String mParam2;
     EditText edtCpf, edtDataNascimento;
     DatePickerDialog datePickerDialog;
+    Spinner spinnerEstadoCivil;
 
     final Handler myHandler = new Handler() {
         public void handleMessage(Message msg) {
@@ -66,7 +67,7 @@ public class CadastroPessoal extends Fragment {
         final View view = inflater.inflate(R.layout.fragment_cadastro_pessoal, container, false);
 
         // Inflate the layout for this fragment
-        Spinner spinnerEstadoCivil = (Spinner) view.findViewById(R.id.spnFragEstadoCivil);
+        spinnerEstadoCivil = (Spinner) view.findViewById(R.id.spnFragEstadoCivil);
 
         ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(getActivity(),android.R.layout.simple_spinner_item, new String[]{
                 "Estado Civil:",
