@@ -1,5 +1,7 @@
 package dao;
 
+import android.util.Log;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -189,6 +191,75 @@ public class DAOAgendamento {
 			System.out.print(e1.getStackTrace());
 		}
 		return lista;
-	}	
+	}
+
+	public ArrayList<String> listarMeusAgendamentos(int chave) throws ParseException{
+
+		//System.out.println(chave);
+
+		ArrayList<String> lista = new ArrayList<>();
+		String sqlSelect = "select \n" +
+				"uni.nomeFantasia\n" +
+				",med.nomeMedico\n" +
+				",age.dataAgendamentoComeco\n" +
+				",esp.especialidade\n" +
+				",age.codAgendamento\n" +
+				"from \n" +
+				"tcc.paciente pac\n" +
+				"inner join tcc.agendamento age on pac.codPaciente = age.codPaciente and age.flagAtivo = 1\n" +
+				"inner join tcc.unidade uni on age.codUnidade = uni.codUnidade\n" +
+				"inner join tcc.medico med on age.codMedico = med.codMedico\n" +
+				"left join tcc.especialidade esp on age.codEspecialidade = esp.codEspecialidade\n" +
+				"where pac.codLogin = ?\n" +
+				"group by\n" +
+				"uni.nomeFantasia\n" +
+				",med.nomeMedico\n" +
+				",age.dataAgendamentoComeco\n" +
+				",esp.especialidade\n" +
+				",age.codAgendamento\n" +
+				"order by \n" +
+				"age.dataAgendamentoComeco desc;";
+		// usando o try with resources do Java 7, que fecha o que abriu
+		Log.e("Login:","CHEGAMOS AQUI 19");
+		try (Connection conn = FabricaConexao.getConexao();
+			 PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
+			stm.setInt(1, chave);
+			try (ResultSet rs = stm.executeQuery();) {
+				while(rs.next()) {
+
+					DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+
+					String dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(rs.getDate("dataAgendamentoComeco"));
+
+					String agendamento = "";
+
+					if(rs.getString("especialidade") == null || rs.getString("especialidade").equals("")){
+						Log.e("Login:","CHEGAMOS AQUI 20");
+						agendamento =rs.getString("nomeFantasia") + "\n" +
+								rs.getString("nomeMedico") + "\n" +
+								dataFormatada + "\n" +
+								rs.getInt("codAgendamento");
+					}else{
+
+						Log.e("Login:","CHEGAMOS AQUI 20");
+						agendamento =rs.getString("nomeFantasia") + "\n" +
+								rs.getString("nomeMedico") + "\n" +
+								dataFormatada + "\n" +
+								rs.getString("especialidade") + "\n" +
+								rs.getInt("codAgendamento");
+					}
+
+					Log.e("Login:","CHEGAMOS AQUI 21");
+					Log.e("Agendamentos",agendamento);
+					lista.add(agendamento);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			System.out.print(e1.getStackTrace());
+		}
+		return lista;
+	}
 
 }

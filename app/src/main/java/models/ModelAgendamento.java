@@ -1,8 +1,10 @@
 package models;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
 
+import dao.DAOAgendamento;
 import to.TOAgendamento;
 
 public class ModelAgendamento {
@@ -196,5 +198,12 @@ public class ModelAgendamento {
 		// TODO Auto-generated method stub
 		
 	}
+	public ArrayList<String> meusAgendamentos(int pCodLogin) throws ParseException {
 
+		DAOAgendamento dao = new DAOAgendamento();
+
+		ArrayList<String> listaMeusAgendamento = dao.listarMeusAgendamentos(pCodLogin);
+
+		return listaMeusAgendamento;
+	}
 }
