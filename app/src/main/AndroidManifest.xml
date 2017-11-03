@@ -30,7 +30,6 @@
             android:name=".MainActivity"
             android:configChanges="orientation|screenSize"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".MapActivity" />
         <activity
             android:name=".LoginActivity"
             android:configChanges="orientation|screenSize" />

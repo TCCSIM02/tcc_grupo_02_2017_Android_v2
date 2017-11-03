@@ -35,13 +35,11 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
-import models.CategoryModel;
 import models.ModelUnidade;
 import to.TOUnidade;
 
 public class MainActivity extends CommonActivity implements NavigationView.OnNavigationItemSelectedListener, OnMapReadyCallback {
 
-    ArrayList<CategoryModel> categoryArray;
     Toolbar toolbar;
 
     protected Context context;
@@ -82,8 +80,6 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
         mapFragment.getMapAsync(this);
 
         setHeaderTitle(getString(R.string.app_name));
-
-        categoryArray = new ArrayList<>();
 
         //AutoCOmpletetextView
         String[] busca = {"Odontologista", "Cardiologista", "Oftamologista", "Ginecologista", "Radiologista", "Otorrinolaringologista", "Pediatra", "Geriatra"};

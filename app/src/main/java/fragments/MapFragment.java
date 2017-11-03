@@ -13,15 +13,11 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.model.LatLng;
 
-import java.util.ArrayList;
-
-import models.ActiveModels;
-import models.BusinessModel;
 import util.GPSTracker;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
     //CommonClass common;
-    ArrayList<BusinessModel> postItems;
+
     String PREF_BUSINESS = "pref_business";
     GPSTracker gpsTracker;
     Double cur_latitude, cur_longitude;
@@ -52,7 +48,7 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
 
     @Override
     public void onResume() {
-        postItems = ActiveModels.LIST_BUSINESS_MODEL;
+
         com.google.android.gms.maps.MapFragment mapFragment = (com.google.android.gms.maps.MapFragment) act.getFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
