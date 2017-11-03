@@ -1,5 +1,7 @@
 package models;
 
+import android.util.Log;
+
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Date;
@@ -205,5 +207,14 @@ public class ModelAgendamento {
 		ArrayList<String> listaMeusAgendamento = dao.listarMeusAgendamentos(pCodLogin);
 
 		return listaMeusAgendamento;
+	}
+
+	public ArrayList<String> horariosOcupados(int pCodMedico, String pData) throws ParseException {
+
+		DAOAgendamento dao = new DAOAgendamento();
+		Log.e("DATA", "CHEGAMOS AQUI 32");
+		ArrayList<String> listaHorariosOcupados = dao.listarHorariosOcupados(pCodMedico, pData);
+		Log.e("DATA", "CHEGAMOS AQUI 35 " + listaHorariosOcupados.size());
+		return listaHorariosOcupados;
 	}
 }

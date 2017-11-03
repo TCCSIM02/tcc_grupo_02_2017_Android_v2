@@ -19,7 +19,7 @@ import android.widget.Toast;
 public abstract class CommonActivity extends AppCompatActivity {
     //public CommonClass common;
     boolean logado = false;
-    String nomeUsuario = "";
+    String nomeLogin = "";
     String codLogin = "";
 
     @Override
@@ -80,7 +80,7 @@ public abstract class CommonActivity extends AppCompatActivity {
                     Toast.LENGTH_LONG).show();
 
             codLogin = this.getIntent().getStringExtra("codLogin");
-
+            nomeLogin = this.getIntent().getStringExtra("nomeLogin");
             /*Log.e("Logado: ", this.getIntent().getStringExtra("logado"));
             Toast.makeText(this, "LOGOU NA Tela MAIN: " + logado,
                     Toast.LENGTH_LONG).show();*/

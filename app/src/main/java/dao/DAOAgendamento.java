@@ -262,4 +262,47 @@ public class DAOAgendamento {
 		return lista;
 	}
 
+	public ArrayList<String> listarHorariosOcupados(int pCodMedico,String data) throws ParseException{
+
+		//System.out.println(chave);
+		Log.e("DATA", "CHEGAMOS AQUI 33");
+		ArrayList<String> lista = new ArrayList<>();
+		String sqlSelect = "select concat((lpad(hour(dataAgendamentoComeco),2,0)),':00')  as hora\n" +
+				"from tcc.agendamento a \n" +
+				"where dataAgendamentoComeco =  ?\n" +
+				"and codMedico = ?\n" +
+				"and flagAtivo = 1\n" +
+				"\n" +
+				"union\n" +
+				"\n" +
+				"select concat((lpad(hour(dataAgendamentoFim),2,0)),':00')  as hora\n" +
+				"from tcc.agendamento a \n" +
+				"where dataAgendamentoComeco = ?\n" +
+				"and codMedico = ?\n" +
+				"and flagAtivo = 1;";
+		// usando o try with resources do Java 7, que fecha o que abriu
+		Log.e("Login:","CHEGAMOS AQUI 19");
+		try (Connection conn = FabricaConexao.getConexao();
+			 PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
+			stm.setInt(2, pCodMedico);
+			stm.setInt(4, pCodMedico);
+			stm.setString(1, data);
+			stm.setString(3, data);
+			try (ResultSet rs = stm.executeQuery();) {
+				while(rs.next()) {
+
+					String horario = "";
+					Log.e("DATA", "CHEGAMOS AQUI 34");
+					horario = rs.getString("hora");
+
+					lista.add(horario);
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+			System.out.print(e1.getStackTrace());
+		}
+		return lista;
+	}
 }

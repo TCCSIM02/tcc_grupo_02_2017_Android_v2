@@ -294,6 +294,8 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
                         Log.e("ERRO CHAMADA AGEND", "Unidade: " + unidade.getCodUnidade());
                         intent.putExtra("codUnidade", String.valueOf(unidade.getCodUnidade()));
                         intent.putExtra("nomeFantasiaUnidade", unidade.getNomeFantasia());
+                        intent.putExtra("logado","true");
+                        intent.putExtra("codLogin",MainActivity.super.codLogin);
                         startActivity(intent);
 
                     }
