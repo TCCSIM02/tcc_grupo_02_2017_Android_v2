@@ -144,19 +144,20 @@ public class ModelEspecialidade {
         return listaString;
     }
 
-    public String[] listarEspecialidadesString(int codUnidade) throws ClassNotFoundException{
+    public String[][] listarEspecialidadesString(int codUnidade) throws ClassNotFoundException{
         ArrayList<TOEspecialidade> lista;
         DAOEspecialidade dao = new DAOEspecialidade();
         lista = dao.listarEspecialidadesUnidade(codUnidade);
 
         int tamanho = lista.size();
-        String[] listaString = new String[tamanho];
+        String[][] listaString = new String[tamanho][2];
         Log.e("Tamanho","Tamanho: " + tamanho);
 
         for(int i = 0 ; i < lista.size() ; i++){
 
             Log.e("Especialidade","Especialidade: " + lista.get(i).getEspecialidade());
-            listaString[i] = lista.get(i).getEspecialidade();
+            listaString[i][0] = lista.get(i).getEspecialidade();
+            listaString[i][1] = String.valueOf(lista.get(i).getCodEspecialidade());
         }
 
         return listaString;

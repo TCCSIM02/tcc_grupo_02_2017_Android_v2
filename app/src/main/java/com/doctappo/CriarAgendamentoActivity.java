@@ -30,8 +30,9 @@ public class CriarAgendamentoActivity extends CommonActivity {
     TextView txtUnidade;
     Spinner spinnerEspecialidade, spinnerMedico, spinnerHorario;
     Button btnAvancar;
-    int codUnidade, codMedico;
+    int codUnidade, codMedico, codEspecialidade;
     ArrayList<Integer> buscaCodMedicos = new ArrayList<Integer>();
+    ArrayList<Integer> buscaCodEspecialidade = new ArrayList<Integer>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +57,9 @@ public class CriarAgendamentoActivity extends CommonActivity {
                 if(!spinnerEspecialidade.getSelectedItem().toString().equals("Especialidade:")){
                     preencherMedico();
                     dataAgendamento.setVisibility(View.VISIBLE);
+                    int posEsp = spinnerEspecialidade.getSelectedItemPosition()-1;
+                    codEspecialidade = buscaCodEspecialidade.get(posEsp);
+                    Log.e("codEspecialidade",buscaCodEspecialidade.size()+ " "+ codEspecialidade);
                 }
             }
 
@@ -92,6 +96,7 @@ public class CriarAgendamentoActivity extends CommonActivity {
                                 int pos = spinnerMedico.getSelectedItemPosition()-1;
                                 Log.e("spinnerMedico",""+ pos);
                                 codMedico = buscaCodMedicos.get(pos);
+                                Log.e("codMedico",buscaCodMedicos.size()+" "+ codMedico);
                                 preencheHorario();
                             }
                         }, mYear, mMonth, mDay);
@@ -105,7 +110,6 @@ public class CriarAgendamentoActivity extends CommonActivity {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
                 if(!spinnerHorario.getSelectedItem().toString().equals("Horários disponíveis:")){
-                    preencherMedico();
                     btnAvancar.setVisibility(View.VISIBLE);
                 }
             }
@@ -134,6 +138,8 @@ public class CriarAgendamentoActivity extends CommonActivity {
         intent.putExtra("spinnerMedico",spinnerMedico.getSelectedItem().toString());
         intent.putExtra("dataAgendamento",String.valueOf(dataAgendamento.getText()));
         intent.putExtra("spinnerHorario",spinnerHorario.getSelectedItem().toString());
+        intent.putExtra("codMedico",String.valueOf(codMedico));
+        intent.putExtra("codEspecialidade",String.valueOf(codEspecialidade));
         Log.v("", String.valueOf(dataAgendamento.getText()));
         startActivity(intent);
     }
@@ -153,10 +159,11 @@ public class CriarAgendamentoActivity extends CommonActivity {
         String[] vetorEspecialidade = new String[tamanho+1];
         vetorEspecialidade[0] = "Especialidade:";
         try {
-            String[] vetorModel = modelEspecialidade.listarEspecialidadesString(codUnidade);
+            String[][] matrizModel = modelEspecialidade.listarEspecialidadesString(codUnidade);
 
             for(int i = 1 ; i < vetorEspecialidade.length  ; i++){
-                vetorEspecialidade[i] = vetorModel[i-1];
+                vetorEspecialidade[i] = matrizModel[i-1][0];
+                buscaCodEspecialidade.add(Integer.parseInt(matrizModel[i-1][1]));
             }
 
         } catch (ClassNotFoundException e) {

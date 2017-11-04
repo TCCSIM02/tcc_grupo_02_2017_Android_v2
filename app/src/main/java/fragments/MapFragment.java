@@ -16,9 +16,7 @@ import com.google.android.gms.maps.model.LatLng;
 import util.GPSTracker;
 
 public class MapFragment extends Fragment implements OnMapReadyCallback {
-    //CommonClass common;
 
-    String PREF_BUSINESS = "pref_business";
     GPSTracker gpsTracker;
     Double cur_latitude, cur_longitude;
 
@@ -29,9 +27,6 @@ public class MapFragment extends Fragment implements OnMapReadyCallback {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.activity_map, container, false);
         act = getActivity();
-
-        //common = new CommonClass(act);
-
 
         gpsTracker = new GPSTracker(act);
         if (gpsTracker.canGetLocation()) {

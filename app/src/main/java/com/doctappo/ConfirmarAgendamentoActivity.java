@@ -8,6 +8,8 @@ import android.widget.TextView;
 
 public class ConfirmarAgendamentoActivity extends CommonActivity {
 
+    int codMedico, codEspecialidade;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

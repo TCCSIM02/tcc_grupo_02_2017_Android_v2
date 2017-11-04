@@ -98,7 +98,7 @@ public class DAOEspecialidade {
         TOEspecialidade toEspecialidade;
         ArrayList<TOEspecialidade> lista = new ArrayList<>();
         String sqlSelect = "select  " +
-                "distinct esp.especialidade " +
+                "distinct esp.codEspecialidade, esp.especialidade " +
                 "from " +
                 "tcc.especialidade esp " +
                 "inner join tcc.associativamedicoespecialidade ass on esp.codEspecialidade = ass.codEspecialidade " +
@@ -111,7 +111,7 @@ public class DAOEspecialidade {
                 while(rs.next()) {
                     toEspecialidade = new TOEspecialidade();
 
-                    //toEspecialidade.setCodEspecialidade(rs.getInt("codEspecialidade"));
+                    toEspecialidade.setCodEspecialidade(rs.getInt("codEspecialidade"));
                     toEspecialidade.setEspecialidade(rs.getString("especialidade"));
                     /*toEspecialidade.setFlagAtivo(rs.getString("flagAtivo"));
                     toEspecialidade.setDescricao(rs.getString("descricao"));*/
