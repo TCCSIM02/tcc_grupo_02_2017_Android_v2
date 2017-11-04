@@ -6,6 +6,8 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import models.ModelAgendamento;
+
 public class ConfirmarAgendamentoActivity extends CommonActivity {
 
     int codMedico, codEspecialidade;
@@ -30,12 +32,26 @@ public class ConfirmarAgendamentoActivity extends CommonActivity {
         txtHorario.setText(this.getIntent().getStringExtra("spinnerHorario"));
 
         Button btnCancelar = (Button)  findViewById(R.id.btnCancelar);
+        Button btnConfirmar = (Button)  findViewById(R.id.btnConfirmarAgendamento);
 
         btnCancelar.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         // calender class's instance and get current date , month and year from calender
+                        Intent intent = new Intent(ConfirmarAgendamentoActivity.this, MainActivity.class);
+                        startActivity(intent);
+                    }
+                }
+        );
+
+        btnConfirmar.setOnClickListener(
+                new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        // calender class's instance and get current date , month and year from calender
+                        ModelAgendamento modelAgendamento = new ModelAgendamento();
+
                         Intent intent = new Intent(ConfirmarAgendamentoActivity.this, MainActivity.class);
                         startActivity(intent);
                     }
