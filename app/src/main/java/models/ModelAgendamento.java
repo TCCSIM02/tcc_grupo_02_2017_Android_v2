@@ -11,7 +11,22 @@ import to.TOAgendamento;
 
 public class ModelAgendamento {
 
-	private int codAgendamento, codPaciente, codMedico, codUnidade, codAtendente, codEspecialidade;
+	private int codAgendamento;
+	private int codPaciente;
+	private int codMedico;
+	private int codUnidade;
+	private int codAtendente;
+	private int codEspecialidade;
+
+	public int getCodLogin() {
+		return codLogin;
+	}
+
+	public void setCodLogin(int codLogin) {
+		this.codLogin = codLogin;
+	}
+
+	private int codLogin;
 	private String flagAtivo;
 	private Date dataCadastro, dataHoraComeco, dataHoraFim;
 	
@@ -19,10 +34,10 @@ public class ModelAgendamento {
 		// TODO Auto-generated constructor stub
 	}
 
-	public ModelAgendamento(int codAgendamento, int codPaciente, int codMedico, int codUnidade, int codAtendente, int codEspecialidade, String flagAtivo, Date dataCadastro,
-			Date dataHoraComeco, Date dataHoraFim) {
+	public ModelAgendamento(int codAgendamento, int codLogin, int codMedico, int codUnidade, int codAtendente, int codEspecialidade, String flagAtivo, Date dataCadastro,
+							Date dataHoraComeco, Date dataHoraFim) {
 		this.codAgendamento = codAgendamento;
-		this.codPaciente = codPaciente;
+		this.codLogin = codLogin;
 		this.codMedico = codMedico;
 		this.codUnidade = codUnidade;
 		this.codAtendente = codAtendente;
@@ -31,6 +46,14 @@ public class ModelAgendamento {
 		this.dataCadastro = dataCadastro;
 		this.dataHoraComeco = dataHoraComeco;
 		this.dataHoraFim = dataHoraFim;
+	}
+
+	public ModelAgendamento(int codLogin, int codMedico, int codUnidade, int codEspecialidade, Date dataHoraComeco) {
+		this.codLogin = codLogin;
+		this.codMedico = codMedico;
+		this.codUnidade = codUnidade;
+		this.codEspecialidade = codEspecialidade;
+		this.dataHoraComeco = dataHoraComeco;
 	}
 
 	/**
@@ -155,12 +178,13 @@ public class ModelAgendamento {
 		
 		toAgendamento.setCodAgendamento(codAgendamento);
 		toAgendamento.setCodPaciente(codPaciente);
+		toAgendamento.setCodLogin(codLogin);
 		toAgendamento.setCodMedico(codMedico);
 		toAgendamento.setCodUnidade(codUnidade);
 		toAgendamento.setCodAtendente(codAtendente);
 		toAgendamento.setCodEspecialidade(codEspecialidade);
 		toAgendamento.setDataCadastro(dataCadastro);
-		toAgendamento.setDataHoraComeco(dataCadastro);
+		toAgendamento.setDataHoraComeco(dataHoraComeco);
 		toAgendamento.setDataHoraFim(dataCadastro);
 		toAgendamento.setFlagAtivo(flagAtivo);
 		
@@ -178,7 +202,10 @@ public class ModelAgendamento {
 
 	public void cadastrarAgendamento() {
 		// TODO Auto-generated method stub
-		
+		DAOAgendamento dao = new DAOAgendamento();
+		TOAgendamento toAgendamento = getTO();
+		Log.e("dataHoraComecoModel",toAgendamento.getDataHoraComeco()+"");
+		dao.cadastrarAgendamento(toAgendamento);
 	}
 
 	public ArrayList<TOAgendamento> listarAgendamentos() {

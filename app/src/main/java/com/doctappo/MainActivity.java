@@ -291,7 +291,8 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
                         intent.putExtra("codUnidade", String.valueOf(unidade.getCodUnidade()));
                         intent.putExtra("nomeFantasiaUnidade", unidade.getNomeFantasia());
                         intent.putExtra("logado","true");
-                        intent.putExtra("codLogin",MainActivity.super.codLogin);
+                        Log.e("codLogin",""+MainActivity.super.codLogin ) ;
+                        intent.putExtra("codLogin",String.valueOf(MainActivity.super.codLogin));
                         startActivity(intent);
 
                     }

@@ -46,6 +46,8 @@ public class CriarAgendamentoActivity extends CommonActivity {
 
         txtUnidade.setText(this.getIntent().getStringExtra("nomeFantasiaUnidade"));
 
+        isLogged();
+
         spinnerEspecialidade = (Spinner) findViewById(R.id.spnEspecialidades);
         spinnerMedico = (Spinner) findViewById(R.id.spnMedico);
         spinnerHorario = (Spinner) findViewById(R.id.spnHorario);
@@ -140,6 +142,9 @@ public class CriarAgendamentoActivity extends CommonActivity {
         intent.putExtra("spinnerHorario",spinnerHorario.getSelectedItem().toString());
         intent.putExtra("codMedico",String.valueOf(codMedico));
         intent.putExtra("codEspecialidade",String.valueOf(codEspecialidade));
+        intent.putExtra("codLogin",super.codLogin);
+        intent.putExtra("codUnidade",String.valueOf(codUnidade));
+        intent.putExtra("logado","true");
         Log.v("", String.valueOf(dataAgendamento.getText()));
         startActivity(intent);
     }

@@ -3,7 +3,22 @@ package to;
 import java.util.Date;
 
 public class TOAgendamento {
-	private int codAgendamento, codPaciente, codMedico, codUnidade, codAtendente, codEspecialidade;
+	private int codAgendamento;
+	private int codPaciente;
+	private int codMedico;
+	private int codUnidade;
+	private int codAtendente;
+	private int codEspecialidade;
+
+	public int getCodLogin() {
+		return codLogin;
+	}
+
+	public void setCodLogin(int codLogin) {
+		this.codLogin = codLogin;
+	}
+
+	private int codLogin;
 	private String  flagAtivo;
 	private Date dataCadastro, dataHoraComeco, dataHoraFim;
 	/**

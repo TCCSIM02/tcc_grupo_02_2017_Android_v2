@@ -10,7 +10,6 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import connectionFactory.FabricaConexao;
 import to.TOAgendamento;
@@ -18,40 +17,38 @@ import to.TOAgendamento;
 public class DAOAgendamento {
 	
 	public void cadastrarAgendamento(TOAgendamento toAgendamento){
-		String sqlInsert = "INSERT INTO tcc.plano (dataAgendamentoComeco,dataAgendamentoFim, statusAgendamento, flagAtivo, dataCadastro) VALUES (current_timestamp(),current_timestamp(),?,1,current_timestamp())";
+		String sqlInsert = "insert into tcc.agendamento (codPaciente, codMedico, codUnidade, codEspecialidade, dataAgendamentoComeco, dataAgendamentoFim, flagAtivo, dataCadastro) \n" +
+				"select codPaciente, ?, ?,  ? , ?, date_add(?,interval 1 HOUR), 1 , current_timestamp() from tcc.paciente where codLogin = ?";
 		// usando o try with resources do Java 7, que fecha o que abriu
+		Log.e("dataHoraComeco","1");
 		try (Connection conn = FabricaConexao.getConexao(); 
 				PreparedStatement stm = conn.prepareStatement(sqlInsert);) {
 
-			Date dataUtil = new Date();
-			//SimpleDateFormat inputdate = new SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
+			Log.e("dataHoraComeco","2");
+			//java.sql.Date dataSql = new java.sql.Date(toAgendamento.getDataHoraComeco().getTime());
+			java.sql.Timestamp dataSql = new java.sql.Timestamp(toAgendamento.getDataHoraComeco().getTime());
+			Log.e("dataHoraComeco","3 " + dataSql);
 
-			//String strDate = inputdate.format(dataUtil);
-			
-			//long longDate = Long.valueOf(strDate);
-			
-			java.sql.Date dataSql = new java.sql.Date(dataUtil.getTime());
-			//java.sql.Date dataSql = new java.sql.Date(longDate);
-						
-			/*stm.setDate(1,toAgendamento.getDataHoraComeco());*/
-			/*stm.setDate(2,toAgendamento.getDataHoraFim());*/
-			/*stm.setString(4,toAgendamento.getFlagAtivo());*/
-			//stm.setString(4,toAgendamento.getFlagAtivo());
-			//stm.setDate(5,dataSql);
-			
+			stm.setInt(1,toAgendamento.getCodMedico());
+			Log.e("dataHoraComeco","4 " + toAgendamento.getCodMedico());
+			stm.setInt(2,toAgendamento.getCodUnidade());
+			Log.e("dataHoraComeco","5 " + toAgendamento.getCodUnidade());
+			stm.setInt(3,toAgendamento.getCodEspecialidade());
+			Log.e("dataHoraComeco","6 " + toAgendamento.getCodEspecialidade());
+			stm.setTimestamp(4,dataSql);
+			Log.e("dataHoraComeco","7 " + dataSql);
+			stm.setTimestamp(5,dataSql);
+			Log.e("dataHoraComeco","8 " + dataSql);
+			stm.setInt(6,toAgendamento.getCodLogin());
+			Log.e("dataHoraComeco","9 " + toAgendamento.getCodLogin());
 			stm.execute();
-			
-			String sqlSelect = "SELECT LAST_INSERT_ID()";
-			
-			try(PreparedStatement stm1 = conn.prepareStatement(sqlSelect);
-					ResultSet rs = stm1.executeQuery();){
-					if(rs.next()){
-						toAgendamento.setCodAgendamento(rs.getInt(1));
-					}
-			}
+			Log.e("dataHoraComeco","10");
+
 		} catch (SQLException e) {
+			Log.e("dataHoraComeco","11 CATCH");
 			e.printStackTrace();
 		}
+		Log.e("dataHoraComeco","12");
 	}
 	
 	public void alterarAgendamento(TOAgendamento toAgendamento){
