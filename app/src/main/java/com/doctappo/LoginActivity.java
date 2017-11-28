@@ -68,8 +68,6 @@ public class LoginActivity extends CommonActivity {
                 if(modelLogin.logar()){
 
                     Log.e("Login:","CHEGAMOS AQUI 4");
-                    Toast.makeText(this, "LOGADO",
-                            Toast.LENGTH_LONG).show();
 
                     Log.e("Login:","LOGADO");
 
