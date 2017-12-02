@@ -16,7 +16,7 @@
     <string name="contact_info">Informação de consulta</string>
     <string name="nav_update_profile">Atualizar perfil</string>
     <string name="nav_change_password">Trocar senha</string>
-    <string name="nav_my_appointment">Minha consultas</string>
+    <string name="nav_my_appointment">Meus agendamentos</string>
     <string name="nav_logout">Logout</string>
     <string name="nav_share">Compartilhar</string>
     <string name="nav_rating">Avaliar-nos</string>

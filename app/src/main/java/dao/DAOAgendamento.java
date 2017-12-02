@@ -196,11 +196,11 @@ public class DAOAgendamento {
 
 		ArrayList<String> lista = new ArrayList<>();
 		String sqlSelect = "select \n" +
-				"uni.nomeFantasia\n" +
+				"age.codAgendamento\n" +
+				",uni.nomeFantasia\n" +
 				",med.nomeMedico\n" +
 				",age.dataAgendamentoComeco\n" +
 				",esp.especialidade\n" +
-				",age.codAgendamento\n" +
 				"from \n" +
 				"tcc.paciente pac\n" +
 				"inner join tcc.agendamento age on pac.codPaciente = age.codPaciente and age.flagAtivo = 1\n" +
@@ -232,18 +232,19 @@ public class DAOAgendamento {
 
 					if(rs.getString("especialidade") == null || rs.getString("especialidade").equals("")){
 						Log.e("Login:","CHEGAMOS AQUI 20");
-						agendamento =rs.getString("nomeFantasia") + "\n" +
+						agendamento =rs.getInt("codAgendamento") +","+ "\n" +
+								rs.getString("nomeFantasia") + "\n" +
 								rs.getString("nomeMedico") + "\n" +
-								dataFormatada + "\n" +
-								rs.getInt("codAgendamento");
+								dataFormatada;
 					}else{
 
 						Log.e("Login:","CHEGAMOS AQUI 20");
-						agendamento =rs.getString("nomeFantasia") + "\n" +
+						agendamento =
+								rs.getInt("codAgendamento") + ","+"\n" +
+								rs.getString("nomeFantasia") + "\n" +
 								rs.getString("nomeMedico") + "\n" +
 								dataFormatada + "\n" +
-								rs.getString("especialidade") + "\n" +
-								rs.getInt("codAgendamento");
+								rs.getString("especialidade");
 					}
 
 					Log.e("Login:","CHEGAMOS AQUI 21");

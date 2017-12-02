@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.text.ParseException;
 
@@ -50,7 +51,9 @@ public class MeusAgendamentosActivity extends CommonActivity {
             public void onItemClick(AdapterView<?> adapter, View view,
                                     int position, long id) {
 
-                //Toast.makeText(getBaseContext(), String.valueOf(position), Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(),(String) adapter.getItemAtPosition(position), Toast.LENGTH_LONG).show();
+
+                //String.valueOf(position);
                 Intent intent = new Intent(MeusAgendamentosActivity.this, VisualizarAgendamentoActivity.class);
                 startActivity(intent);
             }
