@@ -51,7 +51,8 @@ public class MeusAgendamentosActivity extends CommonActivity {
             public void onItemClick(AdapterView<?> adapter, View view,
                                     int position, long id) {
 
-                Toast.makeText(getBaseContext(),(String) adapter.getItemAtPosition(position), Toast.LENGTH_LONG).show();
+                String clicada = (String) adapter.getItemAtPosition(position);
+                Toast.makeText(getBaseContext(),clicada.substring(0,clicada.indexOf(",")), Toast.LENGTH_LONG).show();
 
                 //String.valueOf(position);
                 Intent intent = new Intent(MeusAgendamentosActivity.this, VisualizarAgendamentoActivity.class);
