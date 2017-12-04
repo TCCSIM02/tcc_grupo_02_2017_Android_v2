@@ -81,14 +81,21 @@ public class ConfirmarAgendamentoActivity extends CommonActivity {
                     @Override
                     public void onClick(View v) {
                         // calender class's instance and get current date , month and year from calender
-                        ModelAgendamento modelAgendamento = new ModelAgendamento(codLogin, codMedico, codUnidade, codEspecialidade, dataHoraComeco);
-
-                        modelAgendamento.cadastrarAgendamento();
-
-                        Intent intent = new Intent(ConfirmarAgendamentoActivity.this, MainActivity.class);
-                        startActivity(intent);
+                        confirmar();
                     }
                 }
         );
+    }
+
+    public void confirmar(){
+        ModelAgendamento modelAgendamento = new ModelAgendamento(codLogin, codMedico, codUnidade, codEspecialidade, dataHoraComeco);
+
+        modelAgendamento.cadastrarAgendamento();
+
+        Intent intent = new Intent(ConfirmarAgendamentoActivity.this, MainActivity.class);
+        intent.putExtra("codLogin",super.codLogin);
+        intent.putExtra("codUnidade",String.valueOf(codUnidade));
+        intent.putExtra("logado","true");
+        startActivity(intent);
     }
 }

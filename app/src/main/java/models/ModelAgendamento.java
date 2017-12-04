@@ -244,4 +244,16 @@ public class ModelAgendamento {
 		Log.e("DATA", "CHEGAMOS AQUI 35 " + listaHorariosOcupados.size());
 		return listaHorariosOcupados;
 	}
+
+	public void cancelarAgendamento(){
+		DAOAgendamento dao = new DAOAgendamento();
+		TOAgendamento toAgendamento = getTO();
+		dao.cancelarAgendamento(toAgendamento);
+	}
+
+	public ArrayList visualizarAgendamento(int codAgendamento) throws ParseException {
+		DAOAgendamento dao = new DAOAgendamento();
+
+		return dao.visualizarAgendamento(codAgendamento);
+	}
 }

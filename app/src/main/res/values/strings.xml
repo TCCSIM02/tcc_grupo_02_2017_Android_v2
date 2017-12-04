@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Consult.Me</string>
+    <string name="app_name">Consult.me</string>
     <string name="process_with_Data">Processando dados..</string>
     <string name="hint_search">Buscar</string>
     <string name="title_activity_details">DetailsActivity</string>

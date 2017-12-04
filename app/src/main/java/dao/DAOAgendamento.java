@@ -208,6 +208,7 @@ public class DAOAgendamento {
 				"inner join tcc.medico med on age.codMedico = med.codMedico\n" +
 				"left join tcc.especialidade esp on age.codEspecialidade = esp.codEspecialidade\n" +
 				"where pac.codLogin = ?\n" +
+				"and age.flagativo = 1 " +
 				"group by\n" +
 				"uni.nomeFantasia\n" +
 				",med.nomeMedico\n" +
@@ -300,6 +301,59 @@ public class DAOAgendamento {
 			}
 		} catch (SQLException e1) {
 			System.out.print(e1.getStackTrace());
+		}
+		return lista;
+	}
+
+	public void cancelarAgendamento(TOAgendamento toAgendamento){
+		String sqlUpdate = "update tcc.agendamento set flagativo = 0 where codAgendamento = ?";
+		// usando o try with resources do Java 7, que fecha o que abriu
+		try (Connection conn = FabricaConexao.getConexao();
+			 PreparedStatement stm = conn.prepareStatement(sqlUpdate);) {
+
+			stm.setInt(1,toAgendamento.getCodAgendamento());
+
+			stm.execute();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public ArrayList visualizarAgendamento(int codAgendamento) throws ParseException{
+
+		ArrayList lista = new ArrayList<>();
+		String sqlSelect = "select distinct age.codAgendamento \n" +
+				",uni.nomeFantasia\n" +
+				",med.nomeMedico\n" +
+				",age.dataAgendamentoComeco\n" +
+				",esp.especialidade\n" +
+				"from \n" +
+				"\ttcc.agendamento age\n" +
+				"inner join tcc.unidade uni on age.codUnidade = uni.codUnidade\n" +
+				"inner join tcc.medico med on age.codMedico = med.codMedico\n" +
+				"left join tcc.especialidade esp on age.codEspecialidade = esp.codEspecialidade\n" +
+				"where \n" +
+				"\tage.flagAtivo = 1\n" +
+				"and age.codAgendamento = ?";
+		// usando o try with resources do Java 7, que fecha o que abriu
+		try (Connection conn = FabricaConexao.getConexao();
+			 PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
+			stm.setInt(1, codAgendamento);
+			try (ResultSet rs = stm.executeQuery();) {
+				while(rs.next()) {
+
+					lista.add(rs.getString("nomeFantasia"));
+					lista.add(rs.getString("nomeMedico"));
+					lista.add(rs.getString("dataAgendamentoComeco"));
+					lista.add(rs.getString("especialidade"));
+					lista.add(rs.getString("codAgendamento"));
+
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		} catch (SQLException e1) {
+
 		}
 		return lista;
 	}

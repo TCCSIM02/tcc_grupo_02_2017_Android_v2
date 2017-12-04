@@ -30,8 +30,9 @@ public class MeusAgendamentosActivity extends CommonActivity {
         int tamanho = 1000000;
 
         try {
-
-            tamanho  = modelAgendamento.meusAgendamentos(Integer.parseInt(super.codLogin)).size();
+            int codLogin2 = -1;
+            if (!super.codLogin.equals("")) codLogin2 = Integer.parseInt(super.codLogin);
+            tamanho  = modelAgendamento.meusAgendamentos(codLogin2).size();
         } catch (ParseException e) {
             e.printStackTrace();
         }
@@ -52,10 +53,14 @@ public class MeusAgendamentosActivity extends CommonActivity {
                                     int position, long id) {
 
                 String clicada = (String) adapter.getItemAtPosition(position);
+                String idAgendamento = clicada.substring(0,clicada.indexOf(","));
                 Toast.makeText(getBaseContext(),clicada.substring(0,clicada.indexOf(",")), Toast.LENGTH_LONG).show();
 
                 //String.valueOf(position);
                 Intent intent = new Intent(MeusAgendamentosActivity.this, VisualizarAgendamentoActivity.class);
+                intent.putExtra("codAgendamento",idAgendamento);
+                //intent.putExtra("codLogin",super.codLogin);
+                //intent.putExtra("codUnidade",String.valueOf(codUnidade));
                 startActivity(intent);
             }
         });
