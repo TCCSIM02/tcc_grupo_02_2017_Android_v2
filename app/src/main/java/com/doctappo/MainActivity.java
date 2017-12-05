@@ -218,7 +218,10 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
 
         ArrayList<TOUnidade> listaUnidade = null;
         try {
-            listaUnidade = modelUnidade.listarUnidadesMap();
+            int codLogin2 = -1;
+            if ( codLogin != null ) codLogin2 = Integer.parseInt(codLogin);
+
+            listaUnidade = modelUnidade.listarUnidadesMap(codLogin2);
 
 
         } catch (ClassNotFoundException e) {

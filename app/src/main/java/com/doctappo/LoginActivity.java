@@ -78,7 +78,7 @@ public class LoginActivity extends CommonActivity {
                     startActivity(intent);
 
                 }else{
-                    Toast.makeText(this, "Não de usuário ou a senha não são válidos",
+                    Toast.makeText(this, "Nome de usuário ou a senha não são válidos",
                             Toast.LENGTH_LONG).show();
                     Log.e("Login:","DEU PAU");
                 }

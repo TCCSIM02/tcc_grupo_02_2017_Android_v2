@@ -224,50 +224,101 @@ public class DAOUnidade {
         return lista;
     }
 
-    public ArrayList<TOUnidade> listarUnidadesMap(){
+    public ArrayList<TOUnidade> listarUnidadesMap(int codLogin){
         TOUnidade toUnidade;
         ArrayList<TOUnidade> lista = new ArrayList<>();
-        String sqlSelect = "select codUnidade" +
-                ", razaoSocial" +
-                ", nomeFantasia" +
-                ", nomeRede" +
-                ", endereco" +
-                ", cep" +
-                ", numeroEndereco" +
-                ", latitude" +
-                ", longitude" +
-                ", tel1" +
-                ", tel2" +
-                ", cel " +
-                " from tcc.unidade " +
-                " where flagAtivo = 1";
-        // usando o try with resources do Java 7, que fecha o que abriu
-        try (Connection conn = FabricaConexao.getConexao();
-             PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
-            try (ResultSet rs = stm.executeQuery();) {
-                while(rs.next()) {
-                    toUnidade = new TOUnidade();
 
-                    toUnidade.setCodUnidade(rs.getInt("codUnidade"));
-                    toUnidade.setRazaoSocial(rs.getString("razaoSocial"));
-                    toUnidade.setNomeFantasia(rs.getString("nomeFantasia"));
-                    toUnidade.setNomeRede(rs.getString("nomeRede"));
-                    toUnidade.setEndereco(rs.getString("endereco"));
-                    toUnidade.setCep(rs.getString("cep"));
-                    toUnidade.setNumeroEndereco(rs.getString("numeroEndereco"));
-                    toUnidade.setTel1(rs.getString("tel1"));
-                    toUnidade.setTel2(rs.getString("tel2"));
-                    toUnidade.setCel(rs.getString("cel"));
-                    toUnidade.setLatitude(rs.getDouble("latitude"));
-                    toUnidade.setLongitude(rs.getDouble("longitude"));
+        if(codLogin < 0 ) {
+            String sqlSelect = "select codUnidade" +
+                    ", razaoSocial" +
+                    ", nomeFantasia" +
+                    ", nomeRede" +
+                    ", endereco" +
+                    ", cep" +
+                    ", numeroEndereco" +
+                    ", latitude" +
+                    ", longitude" +
+                    ", tel1" +
+                    ", tel2" +
+                    ", cel " +
+                    " from tcc.unidade " +
+                    " where flagAtivo = 1";
+            // usando o try with resources do Java 7, que fecha o que abriu
+            try (Connection conn = FabricaConexao.getConexao();
+                 PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
+                try (ResultSet rs = stm.executeQuery();) {
+                    while (rs.next()) {
+                        toUnidade = new TOUnidade();
 
-                    lista.add(toUnidade);
+                        toUnidade.setCodUnidade(rs.getInt("codUnidade"));
+                        toUnidade.setRazaoSocial(rs.getString("razaoSocial"));
+                        toUnidade.setNomeFantasia(rs.getString("nomeFantasia"));
+                        toUnidade.setNomeRede(rs.getString("nomeRede"));
+                        toUnidade.setEndereco(rs.getString("endereco"));
+                        toUnidade.setCep(rs.getString("cep"));
+                        toUnidade.setNumeroEndereco(rs.getString("numeroEndereco"));
+                        toUnidade.setTel1(rs.getString("tel1"));
+                        toUnidade.setTel2(rs.getString("tel2"));
+                        toUnidade.setCel(rs.getString("cel"));
+                        toUnidade.setLatitude(rs.getDouble("latitude"));
+                        toUnidade.setLongitude(rs.getDouble("longitude"));
+
+                        lista.add(toUnidade);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
                 }
-            } catch (SQLException e) {
-                e.printStackTrace();
+            } catch (SQLException e1) {
+                System.out.print(e1.getStackTrace());
             }
-        } catch (SQLException e1) {
-            System.out.print(e1.getStackTrace());
+        }else{
+            String sqlSelect = "SELECT \n" +
+                    "  u.codUnidade\n" +
+                    ", u.razaoSocial\n" +
+                    ", u.nomeFantasia\n" +
+                    ", u.nomeRede\n" +
+                    ", u.endereco\n" +
+                    ", u.cep\n" +
+                    ", u.numeroEndereco\n" +
+                    ", u.latitude\n" +
+                    ", u.longitude\n" +
+                    ", u.tel1\n" +
+                    ", u.tel2\n" +
+                    ", u.cel \n" +
+                    "FROM tcc.Unidade U \n" +
+                    "INNER JOIN tcc.AssociativaPlanoUnidade APU ON U.codUnidade = APU.codUnidade \n" +
+                    "INNER JOIN tcc.Plano P ON APU.codPlano = P.codPlano \n" +
+                    "INNER JOIN tcc.Paciente PC ON P.codPlano = PC.codPlano \n" +
+                    "WHERE PC.codLogin = ? and U.flagAtivo = 1";
+            // usando o try with resources do Java 7, que fecha o que abriu
+            try (Connection conn = FabricaConexao.getConexao();
+                 PreparedStatement stm = conn.prepareStatement(sqlSelect);) {
+                stm.setInt(1, codLogin);
+                try (ResultSet rs = stm.executeQuery();) {
+                    while (rs.next()) {
+                        toUnidade = new TOUnidade();
+
+                        toUnidade.setCodUnidade(rs.getInt("codUnidade"));
+                        toUnidade.setRazaoSocial(rs.getString("razaoSocial"));
+                        toUnidade.setNomeFantasia(rs.getString("nomeFantasia"));
+                        toUnidade.setNomeRede(rs.getString("nomeRede"));
+                        toUnidade.setEndereco(rs.getString("endereco"));
+                        toUnidade.setCep(rs.getString("cep"));
+                        toUnidade.setNumeroEndereco(rs.getString("numeroEndereco"));
+                        toUnidade.setTel1(rs.getString("tel1"));
+                        toUnidade.setTel2(rs.getString("tel2"));
+                        toUnidade.setCel(rs.getString("cel"));
+                        toUnidade.setLatitude(rs.getDouble("latitude"));
+                        toUnidade.setLongitude(rs.getDouble("longitude"));
+
+                        lista.add(toUnidade);
+                    }
+                } catch (SQLException e) {
+                    e.printStackTrace();
+                }
+            } catch (SQLException e1) {
+                System.out.print(e1.getStackTrace());
+            }
         }
         return lista;
     }

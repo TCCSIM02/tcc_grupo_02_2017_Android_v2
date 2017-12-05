@@ -398,10 +398,10 @@ public class ModelUnidade {
         return lista;
     }
 
-    public ArrayList<TOUnidade> listarUnidadesMap() throws ClassNotFoundException{
+    public ArrayList<TOUnidade> listarUnidadesMap(int codLogin) throws ClassNotFoundException{
         ArrayList<TOUnidade> lista;
         DAOUnidade dao = new DAOUnidade();
-        lista = dao.listarUnidadesMap();
+        lista = dao.listarUnidadesMap(codLogin);
         return lista;
     }
 }
