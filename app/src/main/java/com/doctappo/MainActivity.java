@@ -127,7 +127,6 @@ public class MainActivity extends CommonActivity implements NavigationView.OnNav
             nav_Menu.findItem(R.id.nav_login).setVisible(false);
             navHeader.findViewById(R.id.txtFullName).setVisibility(View.VISIBLE);
             navHeader.findViewById(R.id.textEmailId).setVisibility(View.VISIBLE);
-
         }
         super.onResume();
     }
