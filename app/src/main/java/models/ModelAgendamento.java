@@ -242,6 +242,9 @@ public class ModelAgendamento {
 		Log.e("DATA", "CHEGAMOS AQUI 32");
 		ArrayList<String> listaHorariosOcupados = dao.listarHorariosOcupados(pCodMedico, pData);
 		Log.e("DATA", "CHEGAMOS AQUI 35 " + listaHorariosOcupados.size());
+		for(int i = 0; i < listaHorariosOcupados.size(); i++){
+			Log.e("DATA", "CHEGAMOS AQUI 35 |" + listaHorariosOcupados.get(i) + "|");
+		}
 		return listaHorariosOcupados;
 	}
 

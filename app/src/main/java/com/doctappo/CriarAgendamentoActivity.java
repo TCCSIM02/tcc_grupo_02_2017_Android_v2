@@ -325,15 +325,35 @@ public class CriarAgendamentoActivity extends CommonActivity {
 
         }
 
+        ArrayList<String> horarioOcupadoFor = new ArrayList<String>();
+
         for(int i = 1 ; i < horas.length ; i++ ){
             if( horariosOcupados.size() > 0){
                 for(int j = 0 ; j < horariosOcupados.size(); j++){
                     if(!horas[i].equals(horariosOcupados.get(j))){
                         horasSpinner.add(horas[i]);
+                        Log.e("hora", "|" + horariosOcupados.get(j) + "|" + horas[i] + "|");
+                    }
+                    else{
+                        horarioOcupadoFor.add(horariosOcupados.get(j));
                     }
                 }
             }else{
                 horasSpinner.add(horas[i]);
+            }
+        }
+
+        for(int i = 1 ; i < horasSpinner.size(); i ++)
+        {
+            for(int j = 1 ; j < horasSpinner.size(); j ++){
+                if(horasSpinner.get(i).equals(horasSpinner.get(j))) horasSpinner.remove(j);
+            }
+        }
+
+        for(int i = 1 ; i < horasSpinner.size(); i ++)
+        {
+            for(int j = 1 ; j < horarioOcupadoFor.size(); j ++){
+                if(horasSpinner.get(i).equals(horarioOcupadoFor.get(j))) horasSpinner.remove(i);
             }
         }
 

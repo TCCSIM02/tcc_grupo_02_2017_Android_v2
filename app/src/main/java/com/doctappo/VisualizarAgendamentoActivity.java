@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,9 +16,10 @@ import models.ModelAgendamento;
 
 public class VisualizarAgendamentoActivity extends CommonActivity {
 
-    int codAgendamento, codLogin;
+    int codAgendamento;
     Button btnCancelarAgendamento;
     private AlertDialog alerta;
+    String codLogin2 = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +28,7 @@ public class VisualizarAgendamentoActivity extends CommonActivity {
         allowBack();
         setHeaderTitle("Visualizar agendamento");
 
-        isLogged();
+        super.isLogged();
 
         TextView txtUnidade = (TextView)findViewById(R.id.txtUnidadeVis);
         TextView txtEspecialidade = (TextView) findViewById(R.id.txtEspecialidadeVis);
@@ -35,7 +37,8 @@ public class VisualizarAgendamentoActivity extends CommonActivity {
         TextView txtHorario =  (TextView) findViewById(R.id.txtHorarioVis);
 
         codAgendamento = Integer.parseInt(this.getIntent().getStringExtra("codAgendamento"));
-        //codLogin = Integer.parseInt(this.getIntent().getStringExtra("codLogin"));
+        Log.e("CodLogin",super.codLogin);
+        codLogin2 = super.codLogin;
 
         ArrayList agendamento = new ArrayList();
         ModelAgendamento modelAgendamento = new ModelAgendamento();
@@ -78,6 +81,9 @@ public class VisualizarAgendamentoActivity extends CommonActivity {
                 modelAgendamento.setCodAgendamento(codAgendamento);
                 modelAgendamento.cancelarAgendamento();
                 Intent intent = new Intent(VisualizarAgendamentoActivity.this, MeusAgendamentosActivity.class);
+                intent.putExtra("codLogin",codLogin2);
+                Log.e("CodLogin2",codLogin2);
+                intent.putExtra("logado","true");
                 startActivity(intent);
             }
         });

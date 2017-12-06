@@ -208,7 +208,7 @@ public class DAOAgendamento {
 				"inner join tcc.medico med on age.codMedico = med.codMedico\n" +
 				"left join tcc.especialidade esp on age.codEspecialidade = esp.codEspecialidade\n" +
 				"where pac.codLogin = ?\n" +
-				"and age.flagativo = 1 " +
+				"and age.flagativo = 1 and age.dataAgendamentoComeco > current_timestamp()" +
 				"group by\n" +
 				"uni.nomeFantasia\n" +
 				",med.nomeMedico\n" +
@@ -216,7 +216,7 @@ public class DAOAgendamento {
 				",esp.especialidade\n" +
 				",age.codAgendamento\n" +
 				"order by \n" +
-				"age.dataAgendamentoComeco desc;";
+				"age.dataAgendamentoComeco asc;";
 		// usando o try with resources do Java 7, que fecha o que abriu
 		Log.e("Login:","CHEGAMOS AQUI 19");
 		try (Connection conn = FabricaConexao.getConexao();
@@ -227,7 +227,7 @@ public class DAOAgendamento {
 
 					DateFormat format = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
-					String dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(rs.getDate("dataAgendamentoComeco"));
+					String dataFormatada = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(rs.getTimestamp("dataAgendamentoComeco"));
 
 					String agendamento = "";
 

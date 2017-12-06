@@ -2,18 +2,18 @@ package com.doctappo;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import java.text.ParseException;
 
 import models.ModelAgendamento;
 
 public class MeusAgendamentosActivity extends CommonActivity {
-
+    String codLogin2 = "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,13 +29,16 @@ public class MeusAgendamentosActivity extends CommonActivity {
 
         int tamanho = 1000000;
 
+        Log.e("CodLogin",super.codLogin);
+        codLogin2 = super.codLogin;
+        Log.e("CodLogin2",codLogin2);
         try {
-            int codLogin2 = -1;
-            if (!super.codLogin.equals("")) codLogin2 = Integer.parseInt(super.codLogin);
-            tamanho  = modelAgendamento.meusAgendamentos(codLogin2).size();
+            tamanho  = modelAgendamento.meusAgendamentos(Integer.parseInt(super.codLogin)).size();
+            Log.e("CodLoginTamanho",tamanho + "");
         } catch (ParseException e) {
             e.printStackTrace();
         }
+        Log.e("CodLoginTamanho",tamanho + "");
 
         ArrayAdapter<String> adapter = null;
         try {
@@ -54,13 +57,13 @@ public class MeusAgendamentosActivity extends CommonActivity {
 
                 String clicada = (String) adapter.getItemAtPosition(position);
                 String idAgendamento = clicada.substring(0,clicada.indexOf(","));
-                Toast.makeText(getBaseContext(),clicada.substring(0,clicada.indexOf(",")), Toast.LENGTH_LONG).show();
 
                 //String.valueOf(position);
                 Intent intent = new Intent(MeusAgendamentosActivity.this, VisualizarAgendamentoActivity.class);
                 intent.putExtra("codAgendamento",idAgendamento);
-                //intent.putExtra("codLogin",super.codLogin);
-                //intent.putExtra("codUnidade",String.valueOf(codUnidade));
+                intent.putExtra("codLogin",codLogin2);
+                Log.e("CodLogin2",codLogin2);
+                intent.putExtra("logado","true");
                 startActivity(intent);
             }
         });

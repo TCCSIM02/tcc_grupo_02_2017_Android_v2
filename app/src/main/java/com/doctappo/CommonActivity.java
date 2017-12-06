@@ -14,7 +14,6 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.DecelerateInterpolator;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public abstract class CommonActivity extends AppCompatActivity {
     //public CommonClass common;
@@ -75,9 +74,9 @@ public abstract class CommonActivity extends AppCompatActivity {
         try{
             logado = Boolean.parseBoolean(this.getIntent().getStringExtra("logado"));
 
-            Toast.makeText(this, this.getIntent().getStringExtra("nomeLogin") + " " +
+            /*Toast.makeText(this, this.getIntent().getStringExtra("nomeLogin") + " " +
                             this.getIntent().getStringExtra("codLogin"),
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_LONG).show();*/
 
             codLogin = this.getIntent().getStringExtra("codLogin");
             nomeLogin = this.getIntent().getStringExtra("nomeLogin");
